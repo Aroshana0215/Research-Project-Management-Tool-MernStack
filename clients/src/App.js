@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
 
-import Navbar from "./components/Headers/HomeNavBar/navBar";
+import Header from "./components/Headers/Header.js";
 
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+        <Header/>
       </BrowserRouter>
     </div>
   );
