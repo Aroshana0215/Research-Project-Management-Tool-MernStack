@@ -1,83 +1,70 @@
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+
+
 module.exports = {
-  entry: "./src/index.js",
+    entry: './src/index.js',
 
-  output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "bundle.js",
-    publicPath: "/",
-  },
+    output: {
+        path: path.join(__dirname, '/dist'),
+        filename: 'bundle.js',
+        publicPath: '/',
+        assetModuleFilename: "assets/img/[hash][ext][query]"
+    },
 
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: "./src/index.html",
-    }),
-    new MiniCssExtractPlugin(),
-  ],
-
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            //pollyfill required
-            presets: [
-              [
-                "@babel/preset-env",
-                {
-                  targets: "defaults",
-                  debug: true,
-                  useBuiltIns: "usage",
-                  corejs: 3,
-                },
-              ],
-              ["@babel/preset-react", { runtime: "automatic" }],
-            ],
-          },
-        },
-      },
-
-      {
-        test: /\.css$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: "" },
-          },
-          "css-loader",
-        ],
-      },
-
-      {
-        test: /\.(s[ac]|c)ss$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: "" },
-          },
-          "css-loader",
-          "postcss-loader",
-          "sass-loader",
-        ],
-      },
-
-      {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-
-        type: "asset",
-      },
+    plugins: [
+        new MiniCssExtractPlugin(),
+        new HTMLWebpackPlugin({
+            template: './src/index.html'
+        })
     ],
-  },
 
-  devServer: {
-    hot: true,
-    port: 3000,
-    open: true,
-  },
-};
+    module: {
+        rules: [
+
+            {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+
+                type: "asset",
+            },
+
+            {
+                test: /\.(s[ac]|c)ss$/i,
+                use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                    options: { publicPath: "" },
+                },
+                    "css-loader",
+                    "postcss-loader",
+                    "sass-loader",
+                ],
+            },
+
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [['@babel/preset-env', { targets: "defaults", "debug": true, "useBuiltIns": "usage", "corejs": 3 }], ['@babel/preset-react', { runtime: "automatic" }]]
+                    }
+                }
+            },
+
+
+        ]
+    },
+
+    devServer: {
+        hot: true,
+        port: 3000,
+        open: true,
+        historyApiFallback: true,
+        historyApiFallback: {
+            disableDotRule: true
+        },
+    },
+
+}
