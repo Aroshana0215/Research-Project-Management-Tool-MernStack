@@ -9,7 +9,7 @@ router.post('/activation' , userCtrl.activateEmail)
 
 router.post('/login' , userCtrl.login)
 
-router.post('/refresh_token' , userCtrl.getAccessToken)
+router.post('/refresh_token/:refreshtoken' , userCtrl.getAccessToken)
 
 router.post('/forgot' , userCtrl.forgotPassword)
 
