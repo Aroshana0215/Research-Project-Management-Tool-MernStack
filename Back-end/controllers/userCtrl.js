@@ -221,4 +221,4 @@ const createRefreshToken = (payload) => {
 }
 
 
-module.exports = userCtrl  
+module.exports = userCtrl
