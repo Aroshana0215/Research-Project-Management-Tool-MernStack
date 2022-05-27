@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 // import { MdDelete } from "react-icons/md";
 
-function AllTopics() {
+function StudentTopicList() {
   const [Topic, setTopic] = useState([]);
 
   useEffect(() => {
@@ -19,17 +19,6 @@ function AllTopics() {
     }
     getTopics();
   }, []);
-
-  function Delete(id) {
-    axios
-      .delete(`http://localhost:5000/topic/${id}`)
-      .then((res) => {
-        alert("Topic details deleted SuccessFully");
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }
 
   //   filterData(salaryplan,searchkey){
   //     const result = salaryplan.filter((salaryplan) =>
@@ -62,10 +51,7 @@ function AllTopics() {
                 <th scope="col">StudentID</th>
                 <th scope="col">topicName</th>
                 <th scope="col">description</th>
-                <th scope="col">feedBack</th>
-                <th scope="col">status</th>
                 <th scope="col">Created date</th>
-                <th scope="col">Updatted date</th>
               </tr>
             </thead>
             <tbody>
@@ -75,19 +61,7 @@ function AllTopics() {
                   <td>{Topic.StudentID}</td>
                   <td>{Topic.topicName}</td>
                   <td>{Topic.description}</td>
-                  <td>{Topic.feedBack}</td>
-                  <td>{Topic.status}</td>
                   <td>{Topic.createdAt.substring(0, 10)}</td>
-                  <td>{Topic.updatedAt.substring(0, 10)}</td>
-
-                  <td>
-                    <Link
-                      className="btn btn-success"
-                      to={"/admin/update/topic/" + Topic._id}
-                    >
-                      Edit
-                    </Link>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -100,4 +74,4 @@ function AllTopics() {
     </div>
   );
 }
-export default AllTopics;
+export default StudentTopicList;

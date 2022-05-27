@@ -32,10 +32,9 @@ function UpdateTopic() {
   async function onSubmit(e) {
     e.preventDefault();
     await axios
-      .put(`http://localhost:5000/delivery/update/${id}`, delivery)
+      .put(`http://localhost:5000/topic/${id}`, delivery)
       .then((response) => {
         alert("Successfully Updated Delivery Details");
-        history.push("/profile/delivery");
         console.log(response);
       })
       .catch((err) => {
@@ -44,7 +43,7 @@ function UpdateTopic() {
   }
 
   const loaddelivery = async () => {
-    const res = await axios.get(`http://localhost:5000/delivery/get/${id}`);
+    const res = await axios.get(`http://localhost:5000/topic/${id}`);
     updateDeliveryDetails(res.data.delivery);
   };
   useEffect(() => {
@@ -57,62 +56,62 @@ function UpdateTopic() {
         <form className="row g-3" onSubmit={onSubmit}>
           <div className="mb-3">
             <label for="formGroupExampleInput" className="form-label">
-              Customer Name
+              StudentID
             </label>
             <input
               type="text"
               className="form-control"
-              placeholder="Customer Name"
-              defaultValue={name}
-              onChange={(e) => onInputChange(e, "name")}
+              placeholder="StudentID"
+              defaultValue={StudentID}
+              onChange={(e) => onInputChange(e, "StudentID")}
             ></input>
           </div>
           <div className="mb-3">
             <label for="formGroupExampleInput" className="form-label">
-              Customer Address
+              topicName
             </label>
             <input
               type="text"
               className="form-control"
-              placeholder="Customer Address"
-              defaultValue={address}
-              onChange={(e) => onInputChange(e, "address")}
+              placeholder="topicName"
+              defaultValue={topicName}
+              onChange={(e) => onInputChange(e, "topicName")}
             ></input>
           </div>
           <div className="mb-3">
             <label for="formGroupExampleInput" className="form-label">
-              Customer Street
+              description
             </label>
             <input
               type="text"
               className="form-control"
               placeholder="Customer Street"
-              defaultValue={street}
-              onChange={(e) => onInputChange(e, "street")}
+              defaultValue={description}
+              onChange={(e) => onInputChange(e, "description")}
             ></input>
           </div>
           <div className="mb-3">
             <label for="formGroupExampleInput" className="form-label">
-              Customer City
+              feedBack
             </label>
             <input
               type="text"
               className="form-control"
-              placeholder="Customer city"
-              defaultValue={city}
-              onChange={(e) => onInputChange(e, "city")}
+              placeholder="feedBack"
+              defaultValue={feedBack}
+              onChange={(e) => onInputChange(e, "feedBack")}
             ></input>
           </div>
           <div className="mb-3">
             <label for="formGroupExampleInput" className="form-label">
-              Customer Postal Code
+              status
             </label>
             <input
               type="number"
               className="form-control"
-              placeholder="Customer Postal Code"
-              defaultValue={postal_code}
-              onChange={(e) => onInputChange(e, "postal_code")}
+              placeholder="status"
+              defaultValue={status}
+              onChange={(e) => onInputChange(e, "status")}
             ></input>
           </div>
           <div className="col-12">
