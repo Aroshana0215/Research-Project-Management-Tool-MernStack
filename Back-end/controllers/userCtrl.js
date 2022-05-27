@@ -86,13 +86,13 @@ const userCtrl = {
         return res.status(400).json({ msg: "Password is incorrect." });
 
       const refresh_token = createRefreshToken({ id: user.id });
-      res.cookie("refreshtoken", refresh_token, {
-        httpOnly: true,
-        path: "/user/refresh_token",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
+      // res.cookie('refreshtoken' , refresh_token , {
+      //     httpOnly : true,
+      //     path : '/user/refresh_token',
+      //     maxAge : 7*24*60*60*1000 // 7 days
+      // })
 
-      res.json({ msg: "Login Successful ! " });
+      res.json({ msg: "Login Successful ! ", token: refresh_token });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
@@ -100,7 +100,8 @@ const userCtrl = {
 
   getAccessToken: (req, res) => {
     try {
-      const rf_token = req.cookies.refreshtoken;
+      //const rf_token = req.cookies.refreshtoken
+      const rf_token = req.params.refreshtoken;
       if (!rf_token) return res.status(400).json({ msg: "Please login now! " });
 
       jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
@@ -219,12 +220,6 @@ const userCtrl = {
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
-  },
-
-  allcustomer: async (req, res) => {
-    Users.find()
-      .then((User) => res.json(User))
-      .catch((err) => res.status(400).json("Error: " + err));
   },
 };
 
