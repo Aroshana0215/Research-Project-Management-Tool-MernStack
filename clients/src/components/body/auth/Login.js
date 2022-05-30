@@ -38,6 +38,7 @@ function Login() {
 
       localStorage.setItem("firstLogin", true);
       sessionStorage.setItem("token", res.data.token);
+      console.log(res.data.token);
 
       dispatch(dispatchLogin());
       history("/admin");

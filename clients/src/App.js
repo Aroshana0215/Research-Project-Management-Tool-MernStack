@@ -61,7 +61,7 @@ const App = () => {
         <Route path="/student/topic/list" exact component={StudentTopicList} />
         <Route path="/admin/topic/list" exact component={AllTopics} />
         <Route path="/admin/topic/" exact component={TopicRegistration} />
-        <Route path="/admin/update/topic/" exact component={UpdateTopic} />
+        <Route path="/admin/update/topic/:id" exact component={UpdateTopic} />
       </div>
     </Router>
   );

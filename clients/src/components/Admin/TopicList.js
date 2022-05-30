@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 // import { MdDelete } from "react-icons/md";
 
 function AllTopics() {
   const [Topic, setTopic] = useState([]);
+  const auth = useSelector((state) => state.auth);
+  const { user, isLogged } = auth;
 
   useEffect(() => {
     function getTopics() {
@@ -72,7 +75,7 @@ function AllTopics() {
               {Topic.map((Topic, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{Topic.StudentID}</td>
+                  <td>{user._id}</td>
                   <td>{Topic.topicName}</td>
                   <td>{Topic.description}</td>
                   <td>{Topic.feedBack}</td>
@@ -85,7 +88,7 @@ function AllTopics() {
                       className="btn btn-success"
                       to={"/admin/update/topic/" + Topic._id}
                     >
-                      Edit
+                      Evaluate
                     </Link>
                   </td>
                 </tr>
