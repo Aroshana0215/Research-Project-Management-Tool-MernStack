@@ -1,42 +1,55 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useStae, useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+// ======== STYLING IMORTS ===========
+// import "./OrderStyles.css";
+// import { AiOutlineEdit } from "react-icons/ai";
 // import { MdDelete } from "react-icons/md";
+// import { grey } from "@material-ui/core/colors";
 
-function StudentTopicList() {
-  const [Topic, setTopic] = useState([]);
+export default function StudentTopicList() {
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [inquiry, setinquiry] = useState([]);
+  const [id, setid] = useState("");
+  const [enable, setEnable] = useState(false);
+  const [topics, setTopics] = useState([]);
 
-  useEffect(() => {
-    function getTopics() {
+  const auth = useSelector((state) => state.auth);
+  const { user, isLogged } = auth;
+  const customerID = useSelector((state) => state.auth.user_id);
+
+  function getinquiry() {
+    if (enable) {
       axios
-        .get("http://localhost:5000/topic/list")
+        .get(`http://localhost:5000/topic/UserTopic/${id}`)
         .then((res) => {
-          setTopic(res.data);
+          console.log(res);
+          setTopics(res.data);
         })
         .catch((err) => {
-          alert(err);
+          console.log(err);
+          // alert(err.massage);
         });
     }
-    getTopics();
-  }, []);
+  }
 
-  //   filterData(salaryplan,searchkey){
-  //     const result = salaryplan.filter((salaryplan) =>
-  //    salaryplan.firstName.toLowerCase().includes(searchkey)||
-  //    salaryplan.lastName.toLowerCase().includes(searchkey)
-  //     )
-  //     this.setState({salaryplan:result})
-  //   }
+  useEffect(() => {
+    if (user._id !== undefined) {
+      setid(user._id);
+      setEnable(true);
+    }
+  });
 
-  //   handleSearchArea=(e)=>{
-  //     const searchkey = e.currentTarget.value;
+  useEffect(() => {
+    console.log(id);
+    getinquiry();
+  }, [enable]);
 
-  //     axios.get("http://localhost:5000/salaryplan").then(res =>{
-  //       if(res.data.success){
-  //         this.filterData(res.data.existingsalaryplan,searchkey)
-  //       }
-  //     });
-  //   }
+  // const filteredCountrise = inquiry.filter((user) => {
+  //   return userStudentID.toLowerCase().includes(searchTerm.toLocaleLowerCase());
+  // });
 
   return (
     <div className="App">
@@ -48,22 +61,28 @@ function StudentTopicList() {
             <thead className="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">StudentID</th>
                 <th scope="col">topicName</th>
                 <th scope="col">description</th>
+                <th scope="col">feedBack</th>
+                <th scope="col">status</th>
                 <th scope="col">Created date</th>
+                <th scope="col">Updatted date</th>
               </tr>
             </thead>
             <tbody>
-              {Topic.map((Topic, index) => (
-                <tr key={index}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{Topic.StudentID}</td>
-                  <td>{Topic.topicName}</td>
-                  <td>{Topic.description}</td>
-                  <td>{Topic.createdAt.substring(0, 10)}</td>
-                </tr>
-              ))}
+              {topics.length > 0 &&
+                topics.map((Topic, index) => (
+                  <tr key={index}>
+                    <th scope="row">{index + 1}</th>
+
+                    <td>{Topic.topicName}</td>
+                    <td>{Topic.description}</td>
+                    <td>{Topic.feedBack}</td>
+                    <td>{Topic.status}</td>
+                    <td>{Topic.createdAt.substring(0, 10)}</td>
+                    <td>{Topic.updatedAt.substring(0, 10)}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
           <br />
@@ -74,4 +93,3 @@ function StudentTopicList() {
     </div>
   );
 }
-export default StudentTopicList;

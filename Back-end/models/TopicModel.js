@@ -5,7 +5,6 @@ const topicSchema = new mongoose.Schema(
     StudentID: {
       type: String,
       required: true,
-      unique: true,
     },
 
     topicName: {
