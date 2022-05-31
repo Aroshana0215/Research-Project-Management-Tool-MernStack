@@ -45,7 +45,7 @@ function Header() {
       </div>
 
           <ul style={transForm}>
-              <li><Link to="/"><i className='fas fa-shopping-cart' ></i>Cart</Link></li>
+              {/* <li><Link to="/"><i className='fas fa-shopping-cart' ></i>Cart</Link></li> */}
               {
                   isLogged
                   ? userLink()

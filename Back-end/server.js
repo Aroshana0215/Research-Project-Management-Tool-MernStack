@@ -18,6 +18,7 @@ app.use(
 // Routes
 app.use("/user", require("./routes/userRouter"));
 app.use("/api", require("./routes/upload"));
+app.use("/assignment" , require("./routes/templateRouter"))
 
 const topic = require("./routes/topicRoute");
 app.use("/topic", topic);

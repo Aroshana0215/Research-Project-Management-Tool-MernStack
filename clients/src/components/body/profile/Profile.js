@@ -18,13 +18,10 @@ const initialState = {
 function Profile() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-
     const users = useSelector(state => state.users)
-
     const { user, isAdmin } = auth
     const [data, setData] = useState(initialState)
     const { name, password, cf_password, err, success } = data
-
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
     const [callback, setCallback] = useState(false)
@@ -83,6 +80,7 @@ function Profile() {
             })
 
             setData({ ...data, err: '', success: "Updated Success!" })
+            location.reload();
         } catch (err) {
             setData({ ...data, err: err.response.data.msg, success: '' })
         }
