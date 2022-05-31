@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import "./OrderStyles.css";
 import { useSelector } from "react-redux";
@@ -6,16 +6,30 @@ import { useHistory } from "react-router-dom";
 import { Form, Button, Col, Row, InputGroup } from "react-bootstrap";
 
 export default function TopicRegistration() {
+  const auth = useSelector((state) => state.auth);
+  const { user, isLogged } = auth;
+
   const [StudentID, setStudentID] = useState("");
   const [topicName, settopicName] = useState("");
   const [description, setdescription] = useState("");
   const [feedBack, setfeedBack] = useState("");
   const [status, setstatus] = useState("");
+  const [id, setid] = useState("");
 
   let history = useHistory();
   // const cusID = useSelector((state) => state.cusLogin.userInfo._id);
 
+  useEffect(() => {
+    setid(user?._id);
+  });
+
+  useEffect(() => {
+    console.log(id);
+    setStudentID(id);
+  }, [id]);
+
   function sendData(e) {
+    e.preventDefault();
     const newCustomer = {
       StudentID,
       topicName,
@@ -26,12 +40,14 @@ export default function TopicRegistration() {
 
     axios
       .post("http://localhost:5000/topic", newCustomer)
-      .then(() => {
-        alert("Topic Details Added Successfully");
+      .then((res) => {
+        // alert("Topic Details Added Successfully");
+        console.log(res);
         history.push("*");
       })
       .catch((err) => {
-        alert(err);
+        // alert(err);
+        console.log(err);
       });
   }
 
@@ -39,7 +55,7 @@ export default function TopicRegistration() {
     <div className="container">
       <div className="oneDetail">
         <Form onSubmit={sendData}>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="name">StudentID</label>
             <input
               type="text"
@@ -51,7 +67,7 @@ export default function TopicRegistration() {
               }}
               required
             />
-          </div>
+          </div> */}
 
           <div className="form-group">
             <label htmlFor="address">Topic Name</label>

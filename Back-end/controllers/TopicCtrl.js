@@ -51,6 +51,16 @@ const oneTopic = asyncHandler(async (req, res) => {
   }
 });
 
+const usersTopic = asyncHandler(async (req, res) => {
+  const ad = await Topics.find({ StudentID: req.params.id });
+
+  if (ad) {
+    res.json(ad);
+  } else {
+    res.status(404).json({ message: "this topic not found" });
+  }
+});
+
 const deleteTopic = asyncHandler(async (req, res) => {
   Topics.findByIdAndDelete(req.params.id)
     .then(() => res.json("Topic  has been removed."))
@@ -64,6 +74,7 @@ const updateTopic = asyncHandler(async (req, res) => {
       Topics.topicName = req.body.topicName;
       Topics.description = req.body.description;
       Topics.feedBack = req.body.feedBack;
+      Topics.status = req.body.status;
 
       Topics.save()
         .then(() => res.json("Topic details updated!"))
@@ -78,4 +89,5 @@ module.exports = {
   updateTopic,
   deleteTopic,
   oneTopic,
+  usersTopic,
 };
