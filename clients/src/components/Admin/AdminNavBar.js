@@ -7,7 +7,7 @@ function AdminNavBar() {
 <nav class="nav flex-column w-2">
   <a class="nav-link active" href="/profile">Profile</a>
   <a class="nav-link" href="/userlist">User List</a>
-  <a class="nav-link" href="#">Assignment / Template</a>
+  <a class="nav-link" href="/assignment">Assignment / Template</a>
   {/* <a class="nav-link">Disabled</a> */}
 </nav>
 

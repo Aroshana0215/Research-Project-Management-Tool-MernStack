@@ -11,7 +11,9 @@ import Profile from "./profile/Profile";
 import EditUser from "./profile/EditUser";
 import UserList from "../Admin/UserList";
 import AdminNavBar from "../Admin/AdminNavBar";
-
+import AssignmentHome from "../Admin/Template/AssignmentHome"
+import AddAssignment from "../Admin/Template/AddAssignment"
+import EditAssignment from "../Admin/Template/EditAssignment"
 
 function Body() {
   const auth = useSelector(state => state.auth)
@@ -30,6 +32,9 @@ function Body() {
         <Route path="/user/activate/:activation_token"  component={ActivationEmail} exact />
         <Route path="/userlist"  component={isAdmin ? UserList : NotFound }  exact/>
         <Route path="/edit_user/:id"  component={isAdmin ? EditUser : NotFound }  exact/>
+        <Route path="/assignment" component={isAdmin ? AssignmentHome : NotFound} exact/>
+        <Route path="/assignment/add" component={isAdmin ? AddAssignment : NotFound} exact/>
+        <Route path="/assignment/edit/:id" component={isAdmin ? EditAssignment : NotFound} exact />
         
       </Switch>
     </div>

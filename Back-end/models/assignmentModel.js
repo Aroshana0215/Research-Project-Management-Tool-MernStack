@@ -3,7 +3,10 @@ const assignmentSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  avatar: {
+  assignment: {
+    type: String,
+  },
+  fileName: {
     type: String,
   },
   cloudinary_id: {
