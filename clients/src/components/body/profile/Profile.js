@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { isLength, isMatch } from '../../utils/validation/Validation'
 import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
-import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
+//import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
 import './profile.scss'
 
 const initialState = {
@@ -18,26 +18,23 @@ const initialState = {
 function Profile() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-
-    const users = useSelector(state => state.users)
-
+    //const users = useSelector(state => state.users)
     const { user, isAdmin } = auth
     const [data, setData] = useState(initialState)
     const { name, password, cf_password, err, success } = data
-
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
     const [callback, setCallback] = useState(false)
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
-    useEffect(() => {
-        if(isAdmin){
-            fetchAllUsers(token).then(res =>{
-                dispatch(dispatchGetAllUsers(res))
-            })
-        }
-    },[token, isAdmin, dispatch, callback])
+    // useEffect(() => {
+    //     if(isAdmin){
+    //         fetchAllUsers(token).then(res =>{
+    //             dispatch(dispatchGetAllUsers(res))
+    //         })
+    //     }
+    // },[token, isAdmin, dispatch, callback])
 
     const handleChange = e => {
         const { name, value } = e.target
@@ -83,6 +80,7 @@ function Profile() {
             })
 
             setData({ ...data, err: '', success: "Updated Success!" })
+            location.reload();
         } catch (err) {
             setData({ ...data, err: err.response.data.msg, success: '' })
         }
@@ -179,7 +177,7 @@ function Profile() {
                     <button disabled={loading} onClick={handleUpdate}>Update</button>
                 </div>
 
-                <div className="col-right">
+                {/* <div className="col-right">
                     <h2>{isAdmin ? "Users" : "My Courses"}</h2>
 
                     <div style={{ overflowX: "auto" }}>
@@ -220,7 +218,7 @@ function Profile() {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> */}
             </div>
         </>
     )

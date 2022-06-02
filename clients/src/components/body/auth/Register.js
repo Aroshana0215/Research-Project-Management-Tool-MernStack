@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification'
 import { isEmpty, isEmail, isLength, isMatch } from '../../utils/validation/Validation.js'
+
 const initialState = {
     name: '',
     email: '',
