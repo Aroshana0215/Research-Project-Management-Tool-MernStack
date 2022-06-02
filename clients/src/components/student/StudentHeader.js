@@ -26,13 +26,13 @@ export default function StudentHeader() {
                 aria-current="page"
                 href="/student/topic/list"
               >
-                Topic List
+                ____ Topic List
               </a>
               <a class="nav-link" href="/admin/topic/list">
-                Admin Topic List
+                _____ Admin Topic List
               </a>
               <a class="nav-link" href="/admin/topic/">
-                Register Toic
+                _____ Register Toic
               </a>
               <a
                 class="nav-link disabled"
@@ -40,7 +40,31 @@ export default function StudentHeader() {
                 tabindex="-1"
                 aria-disabled="true"
               >
-                Disabled
+                ____ Registr Group
+              </a>
+              <a
+                class="nav-link disabled"
+                href="#"
+                tabindex="-1"
+                aria-disabled="true"
+              >
+                ___ My Group
+              </a>
+              <a
+                class="nav-link disabled"
+                href="#"
+                tabindex="-1"
+                aria-disabled="true"
+              >
+                _____Mutual
+              </a>
+              <a
+                class="nav-link disabled"
+                href="#"
+                tabindex="-1"
+                aria-disabled="true"
+              >
+                GroupList
               </a>
             </div>
           </div>

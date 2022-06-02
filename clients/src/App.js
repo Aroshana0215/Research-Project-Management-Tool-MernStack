@@ -13,8 +13,8 @@ import {
 import TopicRegistration from "./components/student/Topics/TopicRegistration";
 import StudentTopicList from "./components/student/Topics/StudentTopicList";
 import StudentHeader from "./components/student/StudentHeader";
-import AllTopics from "./components/Admin/TopicList";
-import UpdateTopic from "./components/Admin/UpdateTopic";
+import AllTopics from "./components/Admin/topics/TopicList";
+import UpdateTopic from "./components/Admin/topics/UpdateTopic";
 
 const App = () => {
   const dispatch = useDispatch();

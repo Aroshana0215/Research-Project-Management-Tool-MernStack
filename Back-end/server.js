@@ -22,6 +22,9 @@ app.use("/api", require("./routes/upload"));
 const topic = require("./routes/topicRoute");
 app.use("/topic", topic);
 
+const group = require("./routes/groupRoute");
+app.use("/group", group);
+
 //Connect to MongoDB
 const URI = process.env.MONGODB_URL;
 mongoose.connect(
