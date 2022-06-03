@@ -14,6 +14,7 @@ import AddAssignment from "../Admin/Template/AddAssignment"
 import EditAssignment from "../Admin/Template/EditAssignment"
 import AdminHome from "./auth/AdminHome";
 import Register from "./auth/Register";
+import Admin from "../Admin/Admin";
 
 function Body() {
   const auth = useSelector(state => state.auth)
@@ -21,7 +22,7 @@ function Body() {
 
   return (
     <div>
-      
+      <Admin/>
       <Switch>
       <Route path="/admin" component={AdminHome}  exact/>
         <Route path="/login" component={isLogged ? NotFound : Login}  exact/>
@@ -30,11 +31,11 @@ function Body() {
         <Route path="/register"  component={isLogged ? NotFound : Register}  exact/>
         <Route path="/profile"  component={isLogged ? Profile : NotFound }  exact/>
         <Route path="/user/activate/:activation_token"  component={ActivationEmail} exact />
-        <Route path="/userlist"  component={isAdmin ? UserList : NotFound }  exact/>
+        {/* <Route path="/userlist"  component={isAdmin ? UserList : NotFound }  exact/>
         <Route path="/edit_user/:id"  component={isAdmin ? EditUser : NotFound }  exact/>
         <Route path="/assignment" component={isAdmin ? AssignmentHome : NotFound} exact/>
         <Route path="/assignment/add" component={isAdmin ? AddAssignment : NotFound} exact/>
-        <Route path="/assignment/edit/:id" component={isAdmin ? EditAssignment : NotFound} exact />
+        <Route path="/assignment/edit/:id" component={isAdmin ? EditAssignment : NotFound} exact /> */}
       </Switch>
     </div>
   )
