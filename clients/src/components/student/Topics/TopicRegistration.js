@@ -43,7 +43,7 @@ export default function TopicRegistration() {
       .then((res) => {
         // alert("Topic Details Added Successfully");
         console.log(res);
-        history.push("*");
+        history.push("/student/topic/list");
       })
       .catch((err) => {
         // alert(err);

@@ -75,7 +75,7 @@ function AllTopics() {
               {Topic.map((Topic, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{user._id}</td>
+                  <td>{Topic.StudentID}</td>
                   <td>{Topic.topicName}</td>
                   <td>{Topic.description}</td>
                   <td>{Topic.feedBack}</td>
