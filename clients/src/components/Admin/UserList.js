@@ -64,7 +64,7 @@ function UserList() {
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Admin</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -77,9 +77,9 @@ function UserList() {
                                         <td>{user.email}</td>
                                         <td>
                                             {
-                                                user.role === 1
-                                                    ? <i className="fas fa-check" title="Admin"></i>
-                                                    : <i className="fas fa-times" title="User"></i>
+                                                user.role == "admin"
+                                                    ? <p>Admin</p>
+                                                    : user.role == "student" ? <p>Student</p> :  user.role == "supervisor" ? <p>Supervisor</p> : user.role == "coSupervisor" ? <p>CoSupervisor</p> : <p>Panel Member</p>
                                             }
                                         </td>
                                         <td>

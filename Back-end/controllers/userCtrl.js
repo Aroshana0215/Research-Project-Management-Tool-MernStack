@@ -8,9 +8,9 @@ const { CLIENT_URL } = process.env;
 const userCtrl = {
   register: async (req, res) => {
     try {
-      const { name, email, password, havingGroup, isLeader } = req.body;
+      const { name, email, password, department , registraionNumber , course , role ,  havingGroup, isLeader } = req.body;
 
-      if (!name || !email || !password)
+      if (!name || !email || !password  )
         return res.status(400).json({ msg: "Please fill in all fields. " });
 
       if (!validateEmail(email))
@@ -30,6 +30,10 @@ const userCtrl = {
       const newUser = {
         name,
         email,
+        registraionNumber,
+        course,
+        department ,
+        role ,
         havingGroup,
         isLeader,
         password: passwordHash,
@@ -56,7 +60,7 @@ const userCtrl = {
         process.env.ACTIVATION_TOKEN_SECRET
       );
 
-      const { name, email, password } = user;
+      const { name, email, password ,  registraionNumber , course , department , role } = user;
 
       const check = await Users.findOne({ email });
       if (check)
@@ -66,6 +70,10 @@ const userCtrl = {
         name,
         email,
         password,
+        registraionNumber,
+        course,
+        department ,
+        role
       });
 
       await newUser.save();

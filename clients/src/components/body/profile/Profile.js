@@ -6,6 +6,7 @@ import { isLength, isMatch } from '../../utils/validation/Validation'
 import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
 //import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
 import './profile.scss'
+import AdminHome from '../auth/AdminHome'
 
 const initialState = {
     name: '',
@@ -55,7 +56,7 @@ function Profile() {
                 return setData({ ...data, err: "File format is incorrect.", success: '' })
 
             let formData = new FormData()
-            formData.append('file', file)
+            formData.append('avatar', file)
 
             setLoading(true)
             const res = await axios.post('http://localhost:5000/api/upload_avatar', formData, {
@@ -129,13 +130,16 @@ function Profile() {
 
     return (
         <>
+        
             <div>
                 {err && showErrMsg(err)}
                 {success && showSuccessMsg(success)}
                 {loading && <h3>Loading.....</h3>}
             </div>
-            <div className="profile_page">
+            <div className="profile_page" >
+        
                 <div className="col-left">
+                
                     <h2>{isAdmin ? "Admin Profile" : "User Profile"}</h2>
 
                     <div className="avatar">

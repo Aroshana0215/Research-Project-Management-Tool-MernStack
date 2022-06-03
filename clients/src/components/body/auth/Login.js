@@ -21,7 +21,7 @@ function Login() {
   const history = useHistory();
 
   if(isLogged){
-    history.push("/profile")
+    history.push("/admin")
   }
 
   const [user, setUser] = useState(initialState);
@@ -49,7 +49,7 @@ function Login() {
       console.log(res.data.token);
 
       dispatch(dispatchLogin());
-      history.push("/profile");
+      history.push("/admin");
     } catch (err) {
       err.response.data.msg &&
         setUser({ ...user, err: err.response.data.msg, success: "" });

@@ -1,30 +1,54 @@
-const fs = require('fs')
+const multer = require("multer");
 
-module.exports = async function(req , res , next) {
-    try {
-        if(!req.files || Object.keys(req.files).length === 0 )
-            return res.status(400).json({msg: "No files were uploaded."})
-        const file = req.files.file ; 
+// set storage
+const storage = multer.diskStorage({
+    // desitnation
+    destination: function (req, res, cb) {
+      cb(null, "./uploads/");
+    },
+    // filename
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + "-" + Date.now() + file.originalname);
+    },
+  });
+  
+  const filerFilter = (req, file, cb) => {
+    cb(null, true);
+  };
+  
+  let upload = multer({
+    storage: storage,
+    fileFilter: filerFilter,
+  });
+  
+  module.exports = upload.single("avatar");
 
-        if(file.size > 1024 * 1024 ){
-            removeTmp(file.tempFilePath)
-            return res.status(400).json({msg: "file size too large."})
-        } //1mb
 
-        if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png'){
-            removeTmp(file.tempFilePath)
-            return res.status(400).json({msg: "File format is incorrect."})
-        }
+// module.exports = async function(req , res , next) {
+//     try {
+//         if(!req.files || Object.keys(req.files).length === 0 )
+//             return res.status(400).json({msg: "No files were uploaded."})
+//         const file = req.files.file ; 
 
-        next()
+//         if(file.size > 1024 * 1024 ){
+//             removeTmp(file.tempFilePath)
+//             return res.status(400).json({msg: "file size too large."})
+//         } //1mb
 
-    } catch (err) {
-        return res.status(500).json({msg: err.message})
-    }
-}
+//         if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png'){
+//             removeTmp(file.tempFilePath)
+//             return res.status(400).json({msg: "File format is incorrect."})
+//         }
 
-const removeTmp = (path) =>{
-    fs.unlink(path , err  => {
-        if(err) throw err
-    })
-}
+//         next()
+
+//     } catch (err) {
+//         return res.status(500).json({msg: err.message})
+//     }
+// }
+
+// const removeTmp = (path) =>{
+//     fs.unlink(path , err  => {
+//         if(err) throw err
+//     })
+// }
