@@ -54,9 +54,9 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Header />
+        <header><Header /></header>
         <Body />
-        <StudentHeader />
+        {/* <StudentHeader /> */}
         <Route path="/" exact component={TopicRegistration} />
         <Route path="/student/topic/list" exact component={StudentTopicList} />
         <Route path="/admin/topic/list" exact component={AllTopics} />

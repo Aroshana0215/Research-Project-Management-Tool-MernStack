@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/user", require("./routes/userRouter"));
-app.use("/api", require("./routes/upload"));
+app.use("/api", require("./routes/uploadRouter"));
 app.use("/assignment", require("./routes/assignmentRoute"));
 
 const topic = require("./routes/topicRoute");
