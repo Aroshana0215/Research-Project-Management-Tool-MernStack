@@ -26,21 +26,21 @@ export default function AdminHome() {
             <h3>Admin<br></br> Dashboard</h3>
                 <ul>
                     <li><i className="fa fa-home"></i> <Link className="nav-link" to="/profile">Profile</Link></li>
-                    <li><i className="fa fa-user"></i> <Link className="nav-link" to="/assignments"> Create New Bill</Link></li>
-                    <li><i className="fa fa-user"></i> <Link className="nav-link" to="/FinanceManagement/bills/report">Monthly Bill Report</Link></li>
-                    <li><i className="fa fa-user"></i><Link to="/" onClick={handleLogout} style={{ textDecoration: "none" }} > Logout </Link></li>
+                    <li><i className="fa fa-user"></i> <Link className="nav-link" to="/assignments">Template / Assignments</Link></li>
+                    <li><i className="fa fa-user"></i> <Link className="nav-link" to="/userlist">User List</Link></li>
+                    <li><i className="fa fa-user"></i><Link  className="nav-link" to="/" onClick={handleLogout} style={{ textDecoration: "none" }} > Logout </Link></li>
                 </ul>
                 </div>
                 <div className="fmmain_content">
                 <Switch>
-                <Route path = "/admin/assignment/" exact component = {AssignmentHome}/>
+                <Route path = "/a/assignment/" exact component = {AssignmentHome}/>
                 </Switch>
-                {/*<Route path = "/FinanceManagement/bills/" exact component = {FinancePic}/>*/}
+
                 <div className="fminfo">
-                
+
                 <Switch>
                 <Route path = "/profile"  component = {Profile}/>
-                <Route path = "/FinanceManagement/bills/report" component = {UserList}/>
+                <Route path = "/userlist" component = {UserList}/>
 
                 </Switch>
                 
