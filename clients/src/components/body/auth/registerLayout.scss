@@ -1,0 +1,26 @@
+.rolebuttons{
+    display: flex;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+#btnstd,
+#btnstaff{
+    width: 100%;
+    background-Color:rgb(255, 255, 255);
+    padding: 10px;
+    font-size: 18px;
+    border: 1px;
+    border-color: black;
+    margin: auto;
+    text-align: center;
+    border: 2px;
+    border-color: rgb(0, 168, 247);
+}
+#btnstd:hover,
+#btnstaff:hover{
+    border-style: outset;
+    cursor: pointer;
+    
+}

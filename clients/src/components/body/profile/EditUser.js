@@ -22,7 +22,7 @@ function EditUser() {
             users.forEach(user => {
                 if (user._id === id) {
                     setEditUser(user)
-                    setCheckAdmin(user.role === 1 ? true : false)
+                    setCheckAdmin(user.role == "admin" ? true : false)
                 }
             })
         } else {

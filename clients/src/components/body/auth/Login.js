@@ -6,7 +6,7 @@ import {
   showSuccessMsg,
 } from "../../utils/notification/Notification";
 import { dispatchLogin } from "../../../redux/actions/authAction";
-import { useDispatch } from "react-redux";
+import { useDispatch  , useSelector} from "react-redux";
 
 const initialState = {
   email: "",
@@ -16,9 +16,17 @@ const initialState = {
 };
 
 function Login() {
+  const auth = useSelector(state => state.auth)
+  const { isLogged} = auth
+  const history = useHistory();
+
+  if(isLogged){
+    history.push("/admin")
+  }
+
   const [user, setUser] = useState(initialState);
   const dispatch = useDispatch();
-  const history = useHistory();
+  
 
   const { email, password, err, success } = user;
 
@@ -41,7 +49,7 @@ function Login() {
       console.log(res.data.token);
 
       dispatch(dispatchLogin());
-      history("/admin");
+      history.push("/admin");
     } catch (err) {
       err.response.data.msg &&
         setUser({ ...user, err: err.response.data.msg, success: "" });

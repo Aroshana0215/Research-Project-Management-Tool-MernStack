@@ -19,7 +19,11 @@ export const dispatchGetUser = (res) => {
         type: ACTIONS.GET_USER,
         payload: {
             user: res.data,
-            isAdmin: res.data.role === 1 ? true : false
+            isAdmin: res.data.role == "admin" ? true : false ,
+            isStudent: res.data.role == "student" ? true : false ,
+            isSupervisor: res.data.role == "supervisor" ? true : false ,
+            isCoSupervisor: res.data.role == "coSupervisor" ? true : false ,
+            isPanelMember: res.data.role == "panelMember" ? true : false ,
         }
     }
 }

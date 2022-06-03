@@ -3,10 +3,12 @@ import ACTIONS from '../actions/'
 const initialState = {
     user: [],
     isLogged: false,
+    isStudent : false ,
     isAdmin: false,
-    // isSuper: false,
-    // isCoSuper: false,
-    // isPanel: false
+    isSupervisor: false,
+    isCoSupervisor: false,
+    isPanelMember: false 
+
 }
 
 
@@ -23,10 +25,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload.user,
+                isStudent : action.payload.isStudent ,
                 isAdmin: action.payload.isAdmin,
-                // isSuper: action.payload.isSuper,
-                // isPanel: action.payload.isPanel,
-                // isCoSuper: action.payload.isCoSuper
+                isSupervisor: action.payload.isSupervisor,
+                isPanelMember: action.payload.isPanelMember,
+                isCoSupervisor: action.payload.isCoSupervisor
             }
             default:
                 return state

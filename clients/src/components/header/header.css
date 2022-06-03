@@ -1,4 +1,4 @@
-header{
+/* header{
     width: 100%;
     min-height: 100px;
     background: #282c34;
@@ -11,7 +11,8 @@ header{
 header a{
     color: white;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
+
 }
 header ul li{
     display: inline-block;
@@ -30,7 +31,7 @@ header ul li img{
 }
 
 /* --------- Dropdown ---------- */
-.drop-nav{
+/* .drop-nav{
     position: relative;
     padding: 10px 0;
 }
@@ -52,4 +53,4 @@ header ul li img{
 .drop-nav:hover .dropdown{
     display: block;
 }
-
+ */

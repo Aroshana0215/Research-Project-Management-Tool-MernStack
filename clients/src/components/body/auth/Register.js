@@ -1,94 +1,50 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
-import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification'
-import { isEmpty, isEmail, isLength, isMatch } from '../../utils/validation/Validation.js'
-const initialState = {
-    name: '',
-    email: '',
-    password: '',
-    cf_password: '',
-    err: '',
-    success: ''
-}
+import { useState, useEffect } from "react";
+import "./registerLayout.scss";
+import StudentRegister from "../../body/auth/StudentRegister";
+import StaffRegister from "../../body/auth/StaffRegister";
 
-function Register() {
-    const [user, setUser] = useState(initialState)
 
-    const { name, email, password, cf_password, err, success } = user
+const Register = () => {
+ 
+  const [StudentReg, setStudentReg] = useState(true);
+  const [StaffReg, setStaffReg] = useState(false);
 
-    const handleChangeInput = e => {
-        const { name, value } = e.target
-        setUser({ ...user, [name]: value, err: '', success: '' })
+  useEffect(() => {
+    if(StudentReg){
+        document.getElementById("btnstd").style.backgroundColor = "#FF7800";
+        document.getElementById("btnstaff").style.backgroundColor = "white";
+        document.getElementById("btnstaff").style.color = "gray";
+        document.getElementById("btnstd").style.color = "black";
+      }
+    if (StaffReg) {
+        document.getElementById("btnstaff").style.backgroundColor = "#FF7800";
+        document.getElementById("btnstd").style.backgroundColor = "white";
+        document.getElementById("btnstaff").style.color = "black";
+        document.getElementById("btnstd").style.color = "gray";
     }
+  });
 
+  const handlestaffReg=()=>{
+    setStudentReg(false);
+    setStaffReg(true);
+  };
+  const handleStdReg=()=>{
+    setStudentReg(true);
+    setStaffReg(false);
+};
 
-    const handleSubmit = async e => {
-        e.preventDefault()
+   
+  return (
+    <>
+    <div><h1>Registration</h1></div>
+    <div className="rolebuttons">
+        <div className="stdbtn" id="btnstd"   onClick={handleStdReg}>I am Student</div>
+        <div className="staffbtn" id="btnstaff"   onClick={handlestaffReg}>I am Staff</div>
+    </div>
+    {StudentReg&&<StudentRegister/>}
+    {StaffReg&&<StaffRegister/>}
+    </>
+  );
+};
 
-        if (isEmpty(name) || isEmpty(password))
-            return setUser({ ...user, err: "Please fill in all fields.", success: '' })
-
-        if (!isEmail(email))
-            return setUser({ ...user, err: "Invalid emails.", success: '' })
-
-        if (isLength(password))
-            return setUser({ ...user, err: "Password must be at least 6 characters.", success: '' })
-
-        if (!isMatch(password, cf_password))
-            return setUser({ ...user, err: "Password did not match.", success: '' })
-
-        try {
-            const res = await axios.post('http://localhost:5000/user/register' , {
-                name , email , password
-            })
-            setUser({...user , err : '' , success : res.data.msg})
-
-        } catch (err) {
-            err.response.data.msg &&
-                setUser({ ...user, err: err.response.data.msg, success: '' })
-        }
-    }
-
-    return (
-        <div className="login_page">
-            <h2>Register</h2>
-
-            {err && showErrMsg(err)}
-            {success && showSuccessMsg(success)}
-
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" placeholder="Enter Name" id="name"
-                        value={name} name="name" onChange={handleChangeInput} />
-                </div>
-                <div>
-                    <label htmlFor="email">Email Address</label>
-                    <input type="text" placeholder="Enter email address" id="email"
-                        value={email} name="email" onChange={handleChangeInput} />
-                </div>
-
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" placeholder="Enter password" id="password"
-                        value={password} name="password" onChange={handleChangeInput} />
-                </div>
-                <div>
-                    <label htmlFor="cf_password">Password</label>
-                    <input type="password" placeholder="Enter confirm password" id="cf_password"
-                        value={cf_password} name="cf_password" onChange={handleChangeInput} />
-                </div>
-
-                <div className="row">
-                    <button type="submit">Register</button>
-                </div>
-            </form>
-            <p>Already have an account ? <Link to="/login">Login</Link></p>
-
-        </div>
-    )
-}
-
-export default Register
-
+export default Register;
