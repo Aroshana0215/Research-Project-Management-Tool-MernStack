@@ -27,6 +27,10 @@ const groupSchema = new mongoose.Schema(
     leader: {
       type: String,
     },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
