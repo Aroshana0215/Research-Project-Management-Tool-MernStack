@@ -11,6 +11,7 @@ const groupRegister = asyncHandler(async (req, res) => {
     Cosupervisor,
     Supervisor,
     leader,
+    status,
   } = req.body;
 
   const groupExits = await Groups.findOne({ GroupName });
@@ -48,6 +49,7 @@ const groupRegister = asyncHandler(async (req, res) => {
     Cosupervisor,
     Supervisor,
     leader,
+    status,
   });
 
   const savedGroup = await NewGroup.save();
@@ -122,6 +124,23 @@ const getMutualStudents = asyncHandler(async (req, res) => {
     res.status(500).json({ msg: error.message });
   }
 });
+
+const updateGroup = asyncHandler(async (req, res) => {
+  Groups.findById(req.params.id)
+    .then((Groups) => {
+      Groups.StudentID = req.body.StudentID;
+      Groups.GroupName = req.body.GroupName;
+      Groups.Cosupervisor = req.body.Cosupervisor;
+      Groups.Supervisor = req.body.Supervisor;
+      Groups.status = req.body.status;
+
+      Topics.save()
+        .then(() => res.json("Group details updated!"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 module.exports = {
   groupRegister,
   getMyGroupDetails,
@@ -129,4 +148,5 @@ module.exports = {
   deletGroup,
   allGrops,
   getMutualStudents,
+  updateGroup,
 };

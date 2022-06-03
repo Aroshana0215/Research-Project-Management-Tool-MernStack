@@ -15,6 +15,10 @@ import StudentTopicList from "./components/student/Topics/StudentTopicList";
 import StudentHeader from "./components/student/StudentHeader";
 import AllTopics from "./components/Admin/topics/TopicList";
 import UpdateTopic from "./components/Admin/topics/UpdateTopic";
+import GroupList from "./components/Admin/groups/GroupList";
+import MyGroup from "./components/student/groups/MyGroup";
+import GroupRegistration from "./components/student/groups/GroupRegistration";
+import MutualStudent from "./components/student/groups/MutualStudent";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,12 +60,27 @@ const App = () => {
       <div>
         <header><Header /></header>
         <Body />
+
+        <StudentHeader />
+        {/* topic registration */}
+
         {/* <StudentHeader /> */}
+
         <Route path="/" exact component={TopicRegistration} />
         <Route path="/student/topic/list" exact component={StudentTopicList} />
         <Route path="/admin/topic/list" exact component={AllTopics} />
         <Route path="/admin/topic/" exact component={TopicRegistration} />
         <Route path="/admin/update/topic/:id" exact component={UpdateTopic} />
+        {/* 
+        group registration */}
+        <Route path="/admin/Group/list" exact component={GroupList} />
+        <Route path="/Student/MyGroup/:id" exact component={MyGroup} />
+        <Route
+          path="/Student/Group/Registration"
+          exact
+          component={GroupRegistration}
+        />
+        <Route path="/Student/MutualStudent" exact component={MutualStudent} />
       </div>
     </Router>
   );

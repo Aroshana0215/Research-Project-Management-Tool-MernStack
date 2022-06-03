@@ -4,13 +4,29 @@ const user = require("../models//userModels.js");
 // const generateToken = require("../utils/generateToken");
 
 const topic = asyncHandler(async (req, res) => {
-  const { StudentID, topicName, description, feedBack, status } = req.body;
+  const {
+    StudentID,
+    topicName,
+    description,
+    feedBack,
+    status,
+    GroupID,
+    GruopName,
+  } = req.body;
 
+  //check existance of account
   const topicExits = await Topics.findOne({ topicName });
 
   if (topicExits) {
     res.status(400);
     throw new Error("This topic name already exits");
+  }
+
+  //check login
+  const leader = await user.findOne({ StudentID });
+  if ((leader.isLeader = false)) {
+    res.status(400);
+    throw new Error("You are not a leader! You cant register for topics");
   }
 
   const User = await Topics.create({
@@ -19,6 +35,8 @@ const topic = asyncHandler(async (req, res) => {
     description,
     feedBack,
     status,
+    GroupID,
+    GruopName,
   });
 
   if (User) {
@@ -29,6 +47,8 @@ const topic = asyncHandler(async (req, res) => {
       description: User.description,
       feedBack: User.feedBack,
       status: User.status,
+      GroupID: User.GroupID,
+      GruopName: User.GruopName,
     });
   } else {
     res.status(400);

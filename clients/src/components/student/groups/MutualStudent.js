@@ -4,35 +4,24 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 // import { MdDelete } from "react-icons/md";
 
-function AllTopics() {
-  const [Topic, setTopic] = useState([]);
+function MutualStudent() {
+  const [MStudent, setMStudet] = useState([]);
   const auth = useSelector((state) => state.auth);
   const { user, isLogged } = auth;
 
   useEffect(() => {
-    function getTopics() {
+    function getMStudent() {
       axios
-        .get("http://localhost:5000/topic/list")
+        .get(" http://localhost:5000/group/mutualUsers")
         .then((res) => {
-          setTopic(res.data);
+          setMStudet(res.data);
         })
         .catch((err) => {
           alert(err);
         });
     }
-    getTopics();
+    getMStudent();
   }, []);
-
-  function Delete(id) {
-    axios
-      .delete(`http://localhost:5000/topic/${id}`)
-      .then((res) => {
-        alert("Topic details deleted SuccessFully");
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }
 
   //   filterData(salaryplan,searchkey){
   //     const result = salaryplan.filter((salaryplan) =>
@@ -62,35 +51,16 @@ function AllTopics() {
             <thead className="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">StudentID</th>
-                <th scope="col">topicName</th>
-                <th scope="col">description</th>
-                <th scope="col">feedBack</th>
-                <th scope="col">status</th>
-                <th scope="col">Created date</th>
-                <th scope="col">Updatted date</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
               </tr>
             </thead>
             <tbody>
-              {Topic.map((Topic, index) => (
+              {MStudent.map((MStudent, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{Topic.StudentID}</td>
-                  <td>{Topic.topicName}</td>
-                  <td>{Topic.description}</td>
-                  <td>{Topic.feedBack}</td>
-                  <td>{Topic.status}</td>
-                  <td>{Topic.createdAt.substring(0, 10)}</td>
-                  <td>{Topic.updatedAt.substring(0, 10)}</td>
-
-                  <td>
-                    <Link
-                      className="btn btn-success"
-                      to={"/admin/update/topic/" + Topic._id}
-                    >
-                      Evaluate
-                    </Link>
-                  </td>
+                  <td>{MStudent.name}</td>
+                  <td>{MStudent.email}</td>
                 </tr>
               ))}
             </tbody>
@@ -103,4 +73,4 @@ function AllTopics() {
     </div>
   );
 }
-export default AllTopics;
+export default MutualStudent;

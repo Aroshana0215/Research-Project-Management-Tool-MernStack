@@ -5,15 +5,16 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Col, Row, InputGroup } from "react-bootstrap";
 
-export default function TopicRegistration() {
+export default function GroupRegistration() {
   const auth = useSelector((state) => state.auth);
   const { user, isLogged } = auth;
 
   const [StudentID, setStudentID] = useState("");
-  const [topicName, settopicName] = useState("");
-  const [description, setdescription] = useState("");
-  const [feedBack, setfeedBack] = useState("");
-  const [status, setstatus] = useState("");
+  const [GroupName, setGroupName] = useState("");
+  const [GroupMembers, setGrupMembers] = useState("");
+  const [Cosupervisor, setCosupervisor] = useState("");
+  const [Supervisor, setSupervisor] = useState("");
+  const [leader, setLeader] = useState("");
   const [id, setid] = useState("");
 
   let history = useHistory();
@@ -26,24 +27,26 @@ export default function TopicRegistration() {
   useEffect(() => {
     console.log(id);
     setStudentID(id);
+    setLeader(id);
   }, [id]);
 
   function sendData(e) {
     e.preventDefault();
     const newCustomer = {
       StudentID,
-      topicName,
-      description,
-      feedBack,
-      status,
+      GroupName,
+      GroupMembers,
+      Cosupervisor,
+      Supervisor,
+      leader,
     };
 
     axios
-      .post("http://localhost:5000/topic", newCustomer)
+      .post("http://localhost:5000/group/register", newCustomer)
       .then((res) => {
         // alert("Topic Details Added Successfully");
         console.log(res);
-        history.push("/student/topic/list");
+        history.push("*");
       })
       .catch((err) => {
         // alert(err);
@@ -70,28 +73,28 @@ export default function TopicRegistration() {
           </div> */}
 
           <div className="form-group">
-            <label htmlFor="address">Topic Name</label>
+            <label htmlFor="GroupName">Group Name</label>
             <input
               type="text"
               className="form-control"
-              id="address"
-              placeholder="Enter your Topic Name"
+              id="GroupName"
+              placeholder="Enter your Group Name"
               onChange={(e) => {
-                settopicName(e.target.value);
+                setGroupName(e.target.value);
               }}
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="street">description</label>
+            <label htmlFor="GroupMembers">Group Members</label>
             <input
               type="text"
               className="form-control"
-              id="street"
-              placeholder="Enter your description"
+              id="GroupMembers"
+              placeholder="Enter your GroupMembers names and id"
               onChange={(e) => {
-                setdescription(e.target.value);
+                setGrupMembers(e.target.value);
               }}
               required
             />
@@ -105,7 +108,7 @@ export default function TopicRegistration() {
               id="city"
               placeholder="Enter Customer City"
               onChange={(e) => {
-                setfeedBack(e.target.value);
+                setCosupervisor(e.target.value);
               }}
               required
             />
@@ -118,7 +121,7 @@ export default function TopicRegistration() {
               id="city"
               placeholder="Enter Customer City"
               onChange={(e) => {
-                setstatus(e.target.value);
+                setSupervisor(e.target.value);
               }}
               required
             />
