@@ -73,7 +73,7 @@ function MenuBar() {
         <a class="nav-link active" aria-current="page" href="/student/template/">Download Template</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/student/submission">Submisson</a>
+        <a class="nav-link active" aria-current="page" href="/submission">Submisson</a>
       </li>
         <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="#">Group Details</a>
