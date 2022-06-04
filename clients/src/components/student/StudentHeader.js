@@ -36,7 +36,7 @@ export default function StudentHeader() {
               </a>
               <a
                 class="nav-link disabled"
-                href="#"
+                href="/Student/Group/Registration"
                 tabindex="-1"
                 aria-disabled="true"
               >
@@ -44,7 +44,7 @@ export default function StudentHeader() {
               </a>
               <a
                 class="nav-link disabled"
-                href="#"
+                href="/Student/MyGroup/:id"
                 tabindex="-1"
                 aria-disabled="true"
               >
@@ -52,7 +52,7 @@ export default function StudentHeader() {
               </a>
               <a
                 class="nav-link disabled"
-                href="#"
+                href="/Student/MutualStudent"
                 tabindex="-1"
                 aria-disabled="true"
               >
@@ -60,11 +60,11 @@ export default function StudentHeader() {
               </a>
               <a
                 class="nav-link disabled"
-                href="#"
+                href="/admin/Group/list"
                 tabindex="-1"
                 aria-disabled="true"
               >
-                GroupList
+                ______ GroupList
               </a>
             </div>
           </div>

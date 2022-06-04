@@ -21,6 +21,12 @@ const topicSchema = new mongoose.Schema(
     status: {
       type: String,
     },
+    GroupID: {
+      type: String,
+    },
+    GruopName: {
+      type: String,
+    },
   },
   {
     timestamps: true,

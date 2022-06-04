@@ -26,7 +26,7 @@ function UpdateTopic() {
     await axios
       .put(`http://localhost:5000/topic/${id}`, salaryplan)
       .then((res) => {
-        alert("Successfully Updated salaryplan Details");
+        alert("You have succesfully updated");
         history.push("/admin/topic/list");
       })
       .catch((err) => {
