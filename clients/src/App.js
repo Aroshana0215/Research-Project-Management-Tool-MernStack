@@ -27,6 +27,11 @@ import AddAssignment from "./components/Admin/Template/AddAssignment";
 import EditAssignment from "./components/Admin/Template/EditAssignment";
 import Register from "./components/body/auth/Register";
 import DownloadTemplates from "./components/student/Template/DownloadTemplates";
+import GroupRegistration from "./components/student/groups/GroupRegistration";
+import GroupList from "./components/Admin/groups/GroupList";
+import { getMutualStudents } from "../../Back-end/controllers/GroupCtrl";
+import MyGroup from "./components/student/groups/MyGroup";
+import MutualStudent from "./components/student/groups/MutualStudent";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -133,13 +138,46 @@ const App = () => {
         {/* topic management */}
         <Route
           path="/student/topic/registration"
-          exact
-          component={TopicRegistration}
+          component={isStudent ? TopicRegistration : NotFound}
         />
-        <Route path="/student/topic/list" exact component={StudentTopicList} />
-        <Route path="/admin/topic/list" exact component={AllTopics} />
-        <Route path="/admin/topic/" exact component={TopicRegistration} />
-        <Route path="/admin/update/topic/:id" exact component={UpdateTopic} />
+        <Route
+          path="/student/topic/list"
+          component={isStudent ? StudentTopicList : NotFound}
+        />
+        <Route
+          path="/admin/topic/list"
+          component={isAdmin ? AllTopics : NotFound}
+        />
+        <Route
+          path="/admin/topic/"
+          component={isAdmin ? TopicRegistration : NotFound}
+        />
+        <Route
+          path="/admin/update/topic/:id"
+          component={isAdmin ? UpdateTopic : NotFound}
+        />
+
+        {/* Group management */}
+        <Route
+          path="/student/group/registration"
+          component={isStudent ? GroupRegistration : NotFound}
+        />
+        <Route
+          path="/student/group/list"
+          component={isStudent ? GroupList : NotFound}
+        />
+        <Route
+          path="/student/group/getMutuals"
+          component={isStudent ? MutualStudent : NotFound}
+        />
+        <Route
+          path="/student/group/myGroup"
+          component={isStudent ? MyGroup : NotFound}
+        />
+        <Route
+          path="/admin/update/topic/:id"
+          component={isAdmin ? UpdateTopic : NotFound}
+        />
       </div>
     </Router>
   );
