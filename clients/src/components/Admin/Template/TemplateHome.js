@@ -1,26 +1,26 @@
 import { Link } from "react-router-dom";
 import React , { useEffect, useState } from "react";
 
-const AssignmentHome = () => {
-  const [assignments, setAssignments] = useState();
+const TemplateHome = () => {
+  const [templates, setTemplates] = useState();
 
   useEffect(() => {
-    const fetchAssignments = async () => {
-      const res = await fetch(`http://localhost:5000/assignment/get_assignments`);
+    const fetchTemplates = async () => {
+      const res = await fetch(`http://localhost:5000/template/get_templates`);
       const data = await res.json();
-      setAssignments(data);
+      setTemplates(data);
     };
-    fetchAssignments();
+    fetchTemplates();
   }, []);
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/assignment/delete/${id}`, {
+      const res = await fetch(`http://localhost:5000/template/delete/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
-        const updatedAssignments = assignments.filter((assignment) => assignment._id !== id);
-        setAssignments(updatedAssignments);
+        const updatedTemplates = templates.filter((template) => template._id !== id);
+        setTemplates(updatedTemplates);
       }
     } catch (error) {
       console.log(error);
@@ -29,11 +29,11 @@ const AssignmentHome = () => {
   return (
     <div className='container'>
       <br /><br /> <center><h3>Templates</h3></center><br />
-      <Link to="/assignment/add">
+      <Link to="/template/add">
         <button className="btn btn-success" type="button">
         Add Template
         </button>
-      </Link><br />
+      </Link><br/><br/>
       <div className="row">
         <table className="customers">
           <thead>
@@ -46,18 +46,18 @@ const AssignmentHome = () => {
           </thead>
           <tbody>
             {
-              assignments?.map((assignment) => (
-                <tr key={assignment._id}>
-                  <td>{assignment._id}</td>
-                  <td>{assignment.name}</td>
-                  <td><a href={assignment.assignment}>{assignment.fileName}</a></td>
+              templates?.map((template) => (
+                <tr key={template._id}>
+                  <td>{template._id}</td>
+                  <td>{template.name}</td>
+                  <td><a href={template.template}>{template.fileName}</a></td>
 
                   <td>
-                    <Link to={`assignment/edit/${assignment._id}`}>
+                    <Link to={`template/edit/${template._id}`}>
                       <i className="fas fa-edit" title="Edit"></i>
                     </Link>
                     <i className="fas fa-trash-alt" title="Remove"
-                      onClick={() => handleDelete(assignment._id)} ></i>
+                      onClick={() => handleDelete(template._id)} ></i>
                   </td>
                 </tr>
               ))
@@ -69,4 +69,4 @@ const AssignmentHome = () => {
   );
 };
 
-export default AssignmentHome;
+export default TemplateHome;

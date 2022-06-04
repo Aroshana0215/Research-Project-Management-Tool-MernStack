@@ -1,39 +1,39 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const EditAssignment = ({ match }) => {
+const EditTemplate = ({ match }) => {
   console.log(match);
   const history = useHistory();
   const [data, setData] = useState({
     name: "",
-    assignment: "",
+    template: "",
     fileName : "",
   });
   useEffect(() => {
-    fetch(`http://localhost:5000/assignment/${match.params.id}`)
+    fetch(`http://localhost:5000/template/${match.params.id}`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
 
   const handleChange = (name) => (e) => {
-    const value = name === "assignment" ? e.target.files[0] : e.target.value;
+    const value = name === "template" ? e.target.files[0] : e.target.value;
     setData({ ...data, [name]: value });
   };
 
   const handleSubmit = async () => {
     try {
       let formData = new FormData();
-      formData.append("assignment", data.assignment);
+      formData.append("template", data.template);
       formData.append("name", data.name);
       formData.append("fileName", data.fileName);
 
-      const res = await fetch(`http://localhost:5000/assignment/edit/${match.params.id}`, {
+      const res = await fetch(`http://localhost:5000/template/edit/${match.params.id}`, {
         method: "PUT",
         body: formData,
       });
       if (res.ok) {
-        setData({ name: "", assignment: ""  , fileName : "" });
-        history.replace("/assignment");
+        setData({ name: "", template: ""  , fileName : "" });
+        history.replace("/template");
       }
     } catch (error) {
       console.log(error);
@@ -58,10 +58,10 @@ const EditAssignment = ({ match }) => {
         <input
           className="form-control"
           type="file"
-          accept="assignment/*"
-          name="assignment"
+          accept="template/*"
+          name="template"
           placeholder={data.fileName}
-          onChange={handleChange("assignment")}
+          onChange={handleChange("template")}
         />
       </div>
 
@@ -74,4 +74,4 @@ const EditAssignment = ({ match }) => {
   );
 };
 
-export default EditAssignment;
+export default EditTemplate;

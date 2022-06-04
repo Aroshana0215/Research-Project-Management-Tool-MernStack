@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-const assignmentSchema = new mongoose.Schema({
+const templateSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  assignment: {
+  template: {
     type: String,
   },
   fileName: {
@@ -14,4 +14,4 @@ const assignmentSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Assignment", assignmentSchema);
+module.exports = mongoose.model("Template", templateSchema);

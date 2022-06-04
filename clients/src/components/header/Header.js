@@ -81,7 +81,7 @@ function Header() {
 
         <form className="d-flex">
           {!user.name ? (
-            <>
+            <h4>
               <Link 
               className="m-3"
               to="/login"
@@ -89,13 +89,14 @@ function Header() {
             >
               Login
             </Link>
-            </>
+            </h4>
           ) : (
             <>
               <Link
                 className="nav-link active transperent"
                 aria-current="page"
                 to="/profile"
+                style={{ textDecoration: "none" }}
               >
                 {user.name}
               </Link>

@@ -69,7 +69,7 @@ function MenuBar() {
                   <a
                     class="nav-link active"
                     aria-current="page"
-                    href="/assignment"
+                    href="/template"
                   >
                     Template Management
                   </a>

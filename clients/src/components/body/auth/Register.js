@@ -11,13 +11,13 @@ const Register = () => {
 
   useEffect(() => {
     if(StudentReg){
-        document.getElementById("btnstd").style.backgroundColor = "#FF7800";
+        document.getElementById("btnstd").style.backgroundColor = "#00eeff";
         document.getElementById("btnstaff").style.backgroundColor = "white";
         document.getElementById("btnstaff").style.color = "gray";
         document.getElementById("btnstd").style.color = "black";
       }
     if (StaffReg) {
-        document.getElementById("btnstaff").style.backgroundColor = "#FF7800";
+        document.getElementById("btnstaff").style.backgroundColor = "#00eeff";
         document.getElementById("btnstd").style.backgroundColor = "white";
         document.getElementById("btnstaff").style.color = "black";
         document.getElementById("btnstd").style.color = "gray";
@@ -36,12 +36,12 @@ const Register = () => {
    
   return (
     <>
-    <div className="container">
-    <div><h1>Registration</h1></div>
-    <div className="rolebuttons">
+    <div className="container"><br/>
+    <div><h1>Registration</h1></div><center>
+    <div className="rolebuttons" style={{width:"500px"}}>
         <div className="stdbtn" id="btnstd"   onClick={handleStdReg}>I am Student</div>
         <div className="staffbtn" id="btnstaff"   onClick={handlestaffReg}>I am Staff</div>
-    </div>
+    </div></center>
     {StudentReg&&<StudentRegister/>}
     {StaffReg&&<StaffRegister/>}
     </div>

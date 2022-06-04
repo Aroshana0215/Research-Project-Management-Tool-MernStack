@@ -22,11 +22,12 @@ import Profile from "./components/body/profile/Profile";
 import ActivationEmail from "./components/body/auth/ActivationEmail";
 import UserList from "./components/Admin/UserList";
 import EditUser from "./components/body/profile/EditUser";
-import AssignmentHome from "./components/Admin/Template/AssignmentHome";
-import AddAssignment from "./components/Admin/Template/AddAssignment";
-import EditAssignment from "./components/Admin/Template/EditAssignment";
+import TemplateHome from "./components/Admin/Template/TemplateHome";
+import AddTemplate from "./components/Admin/Template/AddTemplate";
+import EditTemplate from "./components/Admin/Template/EditTemplate";
 import Register from "./components/body/auth/Register";
 import DownloadTemplates from "./components/student/Template/DownloadTemplates";
+import Home from "./components/Home/Home";
 import GroupRegistration from "./components/student/groups/GroupRegistration";
 import MutualStudent from "./components/student/groups/MutualStudent";
 import GroupList from "./components/Admin/groups/GroupList";
@@ -45,7 +46,7 @@ const App = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const auth = useSelector((state) => state.auth);
-  const { isLogged, isAdmin, isStudent } = auth;
+  const { isLogged , isAdmin , isStudent} = auth;
 
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
@@ -120,26 +121,11 @@ const App = () => {
           exact
         />
         {/* template routs */}
-        <Route
-          path="/assignment"
-          component={isAdmin ? AssignmentHome : NotFound}
-          exact
-        />
-        <Route
-          path="/student/assignment/"
-          component={isStudent ? DownloadTemplates : NotFound}
-          exact
-        />
-        <Route
-          path="/assignment/add"
-          component={isAdmin ? AddAssignment : NotFound}
-          exact
-        />
-        <Route
-          path="/assignment/edit/:id"
-          component={isAdmin ? EditAssignment : NotFound}
-          exact
-        />
+        <Route path="/template" component={isAdmin ? TemplateHome : NotFound} exact/>
+        <Route path="/student/template/" component={isStudent ? DownloadTemplates : NotFound} exact/>
+        <Route path="/template/add" component={isAdmin ? AddTemplate : NotFound} exact/>
+        <Route path="/template/edit/:id" component={isAdmin ? EditTemplate : NotFound} exact />
+      
         {/* topic management */}
 
         <Route
@@ -194,14 +180,12 @@ const App = () => {
         <Route path="/admin/topic/" exact component={TopicRegistration} />
         <Route path="/admin/update/topic/:id" exact component={UpdateTopic} />
 
+        <Route path="/" exact component={Home} />
+        
         <Route exact path="/submission" component={StuSubmissionHome} />
-
-          <Route path="/submission/add" component={AddSubmission} />
-
-          <Route path="/submission/edit/:id" component={EditSubmission} />
-
-          <Route path="/admin/view_submissions" component={DownloadStuSubmissions} />
-
+        <Route path="/submission/add" component={AddSubmission} />
+        <Route path="/submission/edit/:id" component={EditSubmission} />
+        <Route path="/admin/view_submissions" component={DownloadStuSubmissions} />
       </div>
     </Router>
   );

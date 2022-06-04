@@ -50,7 +50,7 @@ function Login() {
       console.log(res.data.token);
 
       dispatch(dispatchLogin());
-      history.push("/admin");
+      history.push("/profile");
     } catch (err) {
       err.response.data.msg &&
         setUser({ ...user, err: err.response.data.msg, success: "" });
