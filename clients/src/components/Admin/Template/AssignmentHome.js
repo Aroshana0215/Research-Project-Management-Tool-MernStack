@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React , { useEffect, useState } from "react";
 
 const AssignmentHome = () => {
   const [assignments, setAssignments] = useState();
@@ -28,20 +28,19 @@ const AssignmentHome = () => {
   };
   return (
     <div className='container'>
-      <br />
+      <br /><br /> <center><h3>Templates</h3></center><br />
       <Link to="/assignment/add">
         <button className="btn btn-success" type="button">
-        Add An Assignment
+        Add Template
         </button>
       </Link><br />
-      <button href="" ></button>
       <div className="row">
         <table className="customers">
           <thead>
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th></th>
+              <th>File</th>
               <th>Action</th>
             </tr>
           </thead>

@@ -36,6 +36,7 @@ const Register = () => {
    
   return (
     <>
+    <div className="container">
     <div><h1>Registration</h1></div>
     <div className="rolebuttons">
         <div className="stdbtn" id="btnstd"   onClick={handleStdReg}>I am Student</div>
@@ -43,6 +44,7 @@ const Register = () => {
     </div>
     {StudentReg&&<StudentRegister/>}
     {StaffReg&&<StaffRegister/>}
+    </div>
     </>
   );
 };

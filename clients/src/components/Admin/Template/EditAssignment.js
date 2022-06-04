@@ -32,7 +32,7 @@ const EditAssignment = ({ match }) => {
         body: formData,
       });
       if (res.ok) {
-        setData({ name: "", assignment: ""  , fileName : ""});
+        setData({ name: "", assignment: ""  , fileName : "" });
         history.replace("/assignment");
       }
     } catch (error) {
@@ -42,7 +42,9 @@ const EditAssignment = ({ match }) => {
 
   return (
     <div style={{ maxWidth: 500, margin: "auto" }}>
+      <br/><br/><h3>Edit Uploaded Template  </h3><br/>
       <div className="mb-3">
+        <label> Template name</label><br/>
         <input
           className="form-control"
           type="text"
@@ -52,6 +54,7 @@ const EditAssignment = ({ match }) => {
         />
       </div>
       <div className="mb-3">
+      <label> File</label><br/>
         <input
           className="form-control"
           type="file"
@@ -61,6 +64,7 @@ const EditAssignment = ({ match }) => {
           onChange={handleChange("assignment")}
         />
       </div>
+
       <div className="text-center">
         <button className="btn btn-primary" onClick={handleSubmit}>
           Update
