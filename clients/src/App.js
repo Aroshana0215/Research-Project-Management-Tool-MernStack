@@ -35,6 +35,11 @@ import GroupListS from "./components/student/groups/GroupListS";
 import RequestFor from "./components/student/groups/RequestFor";
 import AdminGroupList from "./components/Admin/groups/AdminGroupList";
 import UpdateGroup from "./components/Admin/groups/UpdateGroup";
+import DownloadStuSubmissions from "./components/Admin/studentsubmissions/DownloadStuSubmissions";
+import EditSubmission from "./components/student/submissions/EditSubmission";
+import AddSubmission from "./components/student/submissions/AddSubmission";
+import StuSubmissionHome from "./components/student/submissions/StuSubmissionHome";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -136,6 +141,7 @@ const App = () => {
           exact
         />
         {/* topic management */}
+
         <Route
           path="/student/topic/registration"
           component={isStudent ? TopicRegistration : NotFound}
@@ -181,6 +187,21 @@ const App = () => {
           path="/Admin/group/update/:id"
           component={isLogged ? UpdateGroup : NotFound}
         />
+
+        <Route path="/student/topic/registration" exact component={TopicRegistration} />
+        <Route path="/student/topic/list" exact component={StudentTopicList} />
+        <Route path="/admin/topic/list" exact component={AllTopics} />
+        <Route path="/admin/topic/" exact component={TopicRegistration} />
+        <Route path="/admin/update/topic/:id" exact component={UpdateTopic} />
+
+        <Route exact path="/submission" component={StuSubmissionHome} />
+
+          <Route path="/submission/add" component={AddSubmission} />
+
+          <Route path="/submission/edit/:id" component={EditSubmission} />
+
+          <Route path="/admin/view_submissions" component={DownloadStuSubmissions} />
+
       </div>
     </Router>
   );
