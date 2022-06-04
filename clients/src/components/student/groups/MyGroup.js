@@ -62,11 +62,11 @@ export default function MyGroup() {
   // });
 
   return (
-    <div className="App">
+    <div className="App"> <br/><br/> <center><h3> Group Management Details </h3></center> 
       <div className="header"></div>
 
       <div className="content">
-        <div className="container">
+        <div className="container"> <br/><br/>
           <table className="table table-bordered border-primary">
             <thead className="thead-dark">
               <tr>
