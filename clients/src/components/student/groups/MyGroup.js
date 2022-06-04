@@ -6,7 +6,19 @@ import { useSelector } from "react-redux";
 export default function MyGroup() {
   const [id, setid] = useState("");
   const [enable, setEnable] = useState(false);
-  const [MyGroup, setMyGroup] = useState([]);
+  const [Mygroup, setMyGroup] = useState({});
+  const [GroupMembers, setGroupMembers] = useState([]);
+  const {
+    StudentID,
+    GroupName,
+
+    Cosupervisor,
+    Supervisor,
+    status,
+
+    createdAt,
+    updatedAt,
+  } = Mygroup;
 
   const auth = useSelector((state) => state.auth);
   const { user, isLogged } = auth;
@@ -19,6 +31,7 @@ export default function MyGroup() {
         .then((res) => {
           console.log(res);
           setMyGroup(res.data);
+          setGroupMembers(res.data.GroupMembers);
         })
         .catch((err) => {
           console.log(err);
@@ -39,48 +52,51 @@ export default function MyGroup() {
     getMyGroup();
   }, [enable]);
 
+  useEffect(() => {
+    console.log(Mygroup);
+    console.log(GroupName);
+  }, [Mygroup]);
+
   // const filteredCountrise = inquiry.filter((user) => {
   //   return userStudentID.toLowerCase().includes(searchTerm.toLocaleLowerCase());
   // });
 
   return (
-    <div className="App">
+    <div className="App"> <br/><br/> <center><h3> Group Management Details </h3></center> 
       <div className="header"></div>
 
       <div className="content">
-        <div className="container">
+        <div className="container"> <br/><br/>
           <table className="table table-bordered border-primary">
             <thead className="thead-dark">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">GroupName</th>
-                {/* <th scope="col">GroupMembers</th> */}
-                <th scope="col">Cosupervisor</th>
+                <th scope="col">Group Name</th>
+                <th scope="col">Group members</th>
                 <th scope="col">Supervisor</th>
-                <th scope="col">leader</th>
+                <th scope="col">Cosupervisor</th>
                 <th scope="col">status</th>
                 <th scope="col">Created date</th>
                 <th scope="col">Updatted date</th>
-                {/* StudentID, GroupName, GroupMembers, Cosupervisor, Supervisor,
-                leader, status, */}
               </tr>
             </thead>
             <tbody>
-              {MyGroup.length > 0 &&
-                MyGroup.map((MyG, index) => (
-                  <tr key={index}>
-                    <th scope="row">{index + 1}</th>
-
-                    <td>{MyG.GroupName}</td>
-                    {/* <td>{MyG.GroupMembers}</td> */}
-                    <td>{MyG.Cosupervisor}</td>
-                    <td>{MyG.Supervisor}</td>
-                    <td>{MyG.leader}</td>
-                    <td>{MyG.status}</td>
-                    <td>{MyG.createdAt.substring(0, 10)}</td>
-                    <td>{MyG.updatedAt.substring(0, 10)}</td>
-                  </tr>
-                ))}
+              <tr>
+                <td>{GroupName}</td>
+                <td>{GroupMembers.map((member) => member.name)}</td>
+                <td>{Supervisor}</td>
+                <td>{Cosupervisor}</td>
+                <td>{status}</td>
+                <td>{createdAt}</td>
+                <td>{updatedAt}</td>
+                <td>
+                  <Link
+                    className="btn btn-success"
+                    to={"/student/group/update/" + Mygroup._id}
+                  >
+                    request
+                  </Link>
+                </td>
+              </tr>
             </tbody>
           </table>
           <br />

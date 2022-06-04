@@ -23,8 +23,8 @@ const topic = asyncHandler(async (req, res) => {
   }
 
   //check login
-  const leader = await user.findOne({ StudentID });
-  if ((leader.isLeader = false)) {
+  const leader = await user.findOne({ _id: StudentID });
+  if (leader.isLeader == false) {
     res.status(400);
     throw new Error("You are not a leader! You cant register for topics");
   }

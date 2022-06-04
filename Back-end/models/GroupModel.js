@@ -14,7 +14,6 @@ const groupSchema = new mongoose.Schema(
     },
     GroupMembers: [
       {
-        name: String,
         user_id: String,
       },
     ],
@@ -28,8 +27,7 @@ const groupSchema = new mongoose.Schema(
       type: String,
     },
     status: {
-      type: Boolean,
-      default: true,
+      type: String,
     },
   },
   {

@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
+// import "./OrderStyles.css";
 import { useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { Form, Button, Col, Row, InputGroup } from "react-bootstrap";
 
-function UpdateTopic() {
+export default function RequestFor() {
   let history = useHistory();
   const { id } = useParams();
 
   const [salaryplan, updateSalaryplan] = useState({
-    StudentID: "",
-    topicName: "",
-    description: "",
-    feedBack: "",
     status: "",
+    StudentID: "",
+    GroupName: "",
   });
 
-  const { StudentID, topicName, description, feedBack, status } = salaryplan;
+  const { status, StudentID, GroupName } = salaryplan;
 
   const onInputChange = (e, input_field) => {
     updateSalaryplan({ ...salaryplan, [input_field]: e.target.value });
@@ -24,10 +24,10 @@ function UpdateTopic() {
   async function onSubmit(e) {
     e.preventDefault();
     await axios
-      .put(`http://localhost:5000/topic/${id}`, salaryplan)
+      .put(`http://localhost:5000/group/update/${id}`, salaryplan)
       .then((res) => {
         alert("You have succesfully updated");
-        history.push("/admin/topic/list");
+        history.push("/student/group/myGroup");
       })
       .catch((err) => {
         alert(err);
@@ -35,8 +35,9 @@ function UpdateTopic() {
   }
 
   const loadsalaryplan = async () => {
-    const res = await axios.get(`http://localhost:5000/topic/${id}`);
+    const res = await axios.get(`http://localhost:5000/group/getAgroup/${id}`);
     updateSalaryplan(res.data);
+    // alert(res.data);
   };
   useEffect(() => {
     loadsalaryplan();
@@ -49,7 +50,7 @@ function UpdateTopic() {
       <div className="content">
         <div className="container">
           <form className="row g-3" onSubmit={onSubmit}>
-            {/* <div className="mb-3">
+            <div className="mb-3">
               <label htmlFor="formGroupExampleInput" className="form-label">
                 StudentID
               </label>
@@ -61,50 +62,23 @@ function UpdateTopic() {
                 defaultValue={StudentID}
                 onChange={(e) => onInputChange(e, "StudentID")}
               ></input>
-            </div> */}
-            <div className="mb-3">
-              <label htmlFor="formGroupExampleInput" className="form-label">
-                Topic Name
-              </label>
-              <input
-                id="topicName"
-                type="text"
-                className="form-control"
-                placeholder="topicName"
-                defaultValue={topicName}
-                readOnly
-                onChange={(e) => onInputChange(e, "topicName")}
-              ></input>
             </div>
             <div className="mb-3">
               <label htmlFor="formGroupExampleInput" className="form-label">
-                description
+                GroupName
               </label>
               <input
-                id="description"
+                id="GroupName"
                 type="text"
                 className="form-control"
-                placeholder="description"
-                defaultValue={description}
-                readOnly
-                onChange={(e) => onInputChange(e, "description")}
+                placeholder="GroupName"
+                defaultValue={GroupName}
+                onChange={(e) => onInputChange(e, "GroupName")}
               ></input>
             </div>
-            <div className="mb-3">
-              <label htmlFor="formGroupExampleInput" className="form-label">
-                feedBack
-              </label>
-              <input
-                id="feedBack"
-                type="text"
-                className="form-control"
-                placeholder="feedBack"
-                defaultValue={feedBack}
-                onChange={(e) => onInputChange(e, "feedBack")}
-              ></input>
-            </div>{" "}
+
             <label htmlFor="phone" class="fw-bold">
-              Status
+              Request for co-supervicer and supervicer
             </label>
             <div class="form-check">
               <input
@@ -112,32 +86,17 @@ function UpdateTopic() {
                 type="radio"
                 name="flexRadioDefault"
                 id="flexRadioDefault1"
-                value="approved"
+                value="requested"
                 required
                 onChange={(e) => onInputChange(e, "status")}
               />
               <label class="form-check-label" for="flexRadioDefault1">
-                approve
+                request
               </label>
             </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault2"
-                value="rejected"
-                required
-                onChange={(e) => onInputChange(e, "status")}
-              />
-              <label class="form-check-label" for="flexRadioDefault2">
-                reject
-              </label>
-            </div>
-            <br />
             <div className="col-12">
               <button className="btn btn-primary" type="submit">
-                Update
+                send
               </button>
             </div>
           </form>
@@ -146,4 +105,3 @@ function UpdateTopic() {
     </div>
   );
 }
-export default UpdateTopic;
