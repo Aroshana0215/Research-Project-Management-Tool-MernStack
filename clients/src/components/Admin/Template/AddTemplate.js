@@ -1,29 +1,29 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const AddAssignment = () => {
+const AddTemplate = () => {
   const history = useHistory();
   const [data, setData] = useState({
     name: "",
-    assignment: "",
+    template: "",
   });
   const handleChange = (name) => (e) => {
-    const value = name === "assignment" ? e.target.files[0] : e.target.value;
+    const value = name === "template" ? e.target.files[0] : e.target.value;
     setData({ ...data, [name]: value });
   };
   const handleSubmit = async () => {
     try {
       let formData = new FormData();
-      formData.append("assignment", data.assignment);
+      formData.append("template", data.template);
       formData.append("name", data.name);
 
-      const res = await fetch(`http://localhost:5000/assignment/upload_assignment`, {
+      const res = await fetch(`http://localhost:5000/template/upload_template`, {
         method: "POST",
         body: formData,
       });
       if (res.ok) {
-        setData({ name: "", assignment: "" });
-        history.replace("/assignment");
+        setData({ name: "", template: "" });
+        history.replace("/template");
       }
     } catch (error) {
       console.log(error);
@@ -51,9 +51,9 @@ const AddAssignment = () => {
         <input
           className="form-control"
           type="file"
-          accept="assignment/*"
-          name="assignment"
-          onChange={handleChange("assignment")}
+          accept="template/*"
+          name="template"
+          onChange={handleChange("template")}
         />
       </div>
 
@@ -66,4 +66,4 @@ const AddAssignment = () => {
   );
 };
 
-export default AddAssignment;
+export default AddTemplate;

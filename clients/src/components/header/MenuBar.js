@@ -33,7 +33,7 @@ function MenuBar() {
         </li>
           
           <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/assignment">Template Management</a>
+          <a class="nav-link active" aria-current="page" href="/template">Template Management</a>
         </li>
           
           <li className="nav-item dropdown">
@@ -70,7 +70,7 @@ function MenuBar() {
       
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/student/assignment/">Download Template</a>
+        <a class="nav-link active" aria-current="page" href="/student/template/">Download Template</a>
       </li>
         <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="/student/submission">Submisson</a>

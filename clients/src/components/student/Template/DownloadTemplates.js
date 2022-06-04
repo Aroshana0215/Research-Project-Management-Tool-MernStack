@@ -3,15 +3,15 @@ import axios from 'axios';
 import { useEffect, useState } from "react";
 
 function DownloadTemplates() {
-    const [assignments, setAssignments] = useState();
+    const [templates, setTemplates] = useState();
 
     useEffect(() => {
-        const fetchAssignments = async () => {
-          const res = await fetch(`http://localhost:5000/assignment/get_assignments`);
+        const fetchTemplates = async () => {
+          const res = await fetch(`http://localhost:5000/template/get_templates`);
           const data = await res.json();
-          setAssignments(data);
+          setTemplates(data);
         };
-        fetchAssignments();
+        fetchTemplates();
       }, []);
 
       
@@ -29,11 +29,11 @@ function DownloadTemplates() {
           </thead>
           <tbody>
             {
-              assignments?.map((assignment) => (
-                <tr key={assignment._id}>
-                  <td>{assignment._id}</td>
-                  <td>{assignment.name}</td>
-                  <td><a href={assignment.assignment}>{assignment.fileName}</a></td>
+              templates?.map((template) => (
+                <tr key={template._id}>
+                  <td>{template._id}</td>
+                  <td>{template.name}</td>
+                  <td><a href={template.template}>{template.fileName}</a></td>
                 </tr>
               ))
             }

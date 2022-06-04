@@ -22,11 +22,13 @@ import Profile from "./components/body/profile/Profile";
 import ActivationEmail from "./components/body/auth/ActivationEmail";
 import UserList from "./components/Admin/UserList";
 import EditUser from "./components/body/profile/EditUser";
-import AssignmentHome from "./components/Admin/Template/AssignmentHome";
-import AddAssignment from "./components/Admin/Template/AddAssignment";
-import EditAssignment from "./components/Admin/Template/EditAssignment";
+import TemplateHome from "./components/Admin/Template/TemplateHome";
+import AddTemplate from "./components/Admin/Template/AddTemplate";
+import EditTemplate from "./components/Admin/Template/EditTemplate";
 import Register from "./components/body/auth/Register";
 import DownloadTemplates from "./components/student/Template/DownloadTemplates";
+import Home from "./components/Home/Home";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -81,10 +83,10 @@ const App = () => {
         <Route path="/edit_user/:id"  component={isAdmin ? EditUser : NotFound }  exact/>
 
         {/* template routs */}
-        <Route path="/assignment" component={isAdmin ? AssignmentHome : NotFound} exact/>
-        <Route path="/student/assignment/" component={isStudent ? DownloadTemplates : NotFound} exact/>
-        <Route path="/assignment/add" component={isAdmin ? AddAssignment : NotFound} exact/>
-        <Route path="/assignment/edit/:id" component={isAdmin ? EditAssignment : NotFound} exact />
+        <Route path="/template" component={isAdmin ? TemplateHome : NotFound} exact/>
+        <Route path="/student/template/" component={isStudent ? DownloadTemplates : NotFound} exact/>
+        <Route path="/template/add" component={isAdmin ? AddTemplate : NotFound} exact/>
+        <Route path="/template/edit/:id" component={isAdmin ? EditTemplate : NotFound} exact />
 
 
         {/* topic management */}
@@ -93,6 +95,15 @@ const App = () => {
         <Route path="/admin/topic/list" exact component={AllTopics} />
         <Route path="/admin/topic/" exact component={TopicRegistration} />
         <Route path="/admin/update/topic/:id" exact component={UpdateTopic} />
+
+
+
+
+
+
+
+        <Route path="/" exact component={Home} />
+        
       </div>
     </Router>
   );
