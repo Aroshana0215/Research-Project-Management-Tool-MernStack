@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import { isLength, isMatch } from '../../utils/validation/Validation'
 import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
 //import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
-import './profile.scss'
-import AdminHome from '../auth/AdminHome'
+//import './profile.scss'
 
 const initialState = {
     name: '',
@@ -20,7 +19,7 @@ function Profile() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     //const users = useSelector(state => state.users)
-    const { user, isAdmin } = auth
+    const { user , isLogged  , isAdmin , isStudent , isSupervisor , isCoSupervisor , isPanelMember } = auth;
     const [data, setData] = useState(initialState)
     const { name, password, cf_password, err, success } = data
     const [avatar, setAvatar] = useState(false)
@@ -110,24 +109,6 @@ function Profile() {
         if (password) updatePassword()
     }
 
-    const handleDelete = async (id) => {
-        try {
-            if (user._id !== id) {
-                if (window.confirm("Are you sure you want to delete this account?")) {
-                    setLoading(true)
-                    await axios.delete(`http://localhost:5000/user/delete/${id}`, {
-                        headers: { Authorization: token }
-                    })
-                    setLoading(false)
-                    setCallback(!callback)
-                }
-            }
-
-        } catch (err) {
-            setData({ ...data, err: err.response.data.msg, success: '' })
-        }
-    }
-
     return (
         <>
         
@@ -139,9 +120,9 @@ function Profile() {
             <div className="profile_page" >
         
                 <div className="col-left">
-                
-                    <h2>{isAdmin ? "Admin Profile" : "User Profile"}</h2>
-
+                <br /><br />
+                    <h2>{isStudent ? <>Student Profile</> : isAdmin ? <>Admin Profile</> : isSupervisor ?  <>Supervisor Profile</> : isCoSupervisor ? <>CoSupervisor Profile</> : isPanelMember ? <>Panel Member Profile</> : <>Home</> }</h2>
+                    <br />
                     <div className="avatar">
                         <img src={avatar ? avatar : user.avatar} alt="" />
                         <span>

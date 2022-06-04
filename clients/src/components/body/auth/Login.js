@@ -7,6 +7,7 @@ import {
 } from "../../utils/notification/Notification";
 import { dispatchLogin } from "../../../redux/actions/authAction";
 import { useDispatch  , useSelector} from "react-redux";
+import './auth.scss'
 
 const initialState = {
   email: "",
@@ -20,9 +21,9 @@ function Login() {
   const { isLogged} = auth
   const history = useHistory();
 
-  if(isLogged){
-    history.push("/admin")
-  }
+  // if(isLogged){
+  //   history.push("/admin")
+  // }
 
   const [user, setUser] = useState(initialState);
   const dispatch = useDispatch();
