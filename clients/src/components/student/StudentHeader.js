@@ -35,35 +35,19 @@ export default function StudentHeader() {
                 _____ Register Toic
               </a>
               <a
-                class="nav-link disabled"
+                class="nav-link "
                 href="/Student/Group/Registration"
                 tabindex="-1"
-                aria-disabled="true"
               >
                 ____ Registr Group
               </a>
-              <a
-                class="nav-link disabled"
-                href="/Student/MyGroup/:id"
-                tabindex="-1"
-                aria-disabled="true"
-              >
+              <a class="nav-link " href="/Student/MyGroup" tabindex="-1">
                 ___ My Group
               </a>
-              <a
-                class="nav-link disabled"
-                href="/Student/MutualStudent"
-                tabindex="-1"
-                aria-disabled="true"
-              >
+              <a class="nav-link " href="/Student/MutualStudent" tabindex="-1">
                 _____Mutual
               </a>
-              <a
-                class="nav-link disabled"
-                href="/admin/Group/list"
-                tabindex="-1"
-                aria-disabled="true"
-              >
+              <a class="nav-link " href="/admin/Group/list" tabindex="-1">
                 ______ GroupList
               </a>
             </div>

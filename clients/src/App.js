@@ -58,7 +58,9 @@ const App = () => {
   return (
     <Router>
       <div>
-        <header><Header /></header>
+        <header>
+          <Header />
+        </header>
         <Body />
 
         <StudentHeader />
@@ -74,7 +76,7 @@ const App = () => {
         {/* 
         group registration */}
         <Route path="/admin/Group/list" exact component={GroupList} />
-        <Route path="/Student/MyGroup/:id" exact component={MyGroup} />
+        <Route path="/Student/MyGroup" exact component={MyGroup} />
         <Route
           path="/Student/Group/Registration"
           exact

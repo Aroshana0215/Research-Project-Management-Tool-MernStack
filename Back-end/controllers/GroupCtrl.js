@@ -111,16 +111,15 @@ const deletGroup = asyncHandler(async (req, res) => {
 });
 
 const getMutualStudents = asyncHandler(async (req, res) => {
-  // const { degree, faculty } = req.body;
   try {
     const users = await user.find({
-      // "student.degree": degree,
-      // "student.faculty": faculty,
-      // role: "student",
+      role: "student",
       havingGroup: false,
+      isLeader: false,
     });
     res.status(200).json(users);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ msg: error.message });
   }
 });

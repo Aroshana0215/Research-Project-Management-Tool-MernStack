@@ -53,34 +53,28 @@ export default function MyGroup() {
             <thead className="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">GroupName</th>
-                {/* <th scope="col">GroupMembers</th> */}
+                <th scope="col">Name</th>
                 <th scope="col">Cosupervisor</th>
                 <th scope="col">Supervisor</th>
                 <th scope="col">leader</th>
                 <th scope="col">status</th>
-                <th scope="col">Created date</th>
-                <th scope="col">Updatted date</th>
-                {/* StudentID, GroupName, GroupMembers, Cosupervisor, Supervisor,
-                leader, status, */}
+                <th scope="col">createdAt</th>
+                <th scope="col">updatedAt</th>
               </tr>
             </thead>
             <tbody>
-              {MyGroup.length > 0 &&
-                MyGroup.map((MyG, index) => (
-                  <tr key={index}>
-                    <th scope="row">{index + 1}</th>
-
-                    <td>{MyG.GroupName}</td>
-                    {/* <td>{MyG.GroupMembers}</td> */}
-                    <td>{MyG.Cosupervisor}</td>
-                    <td>{MyG.Supervisor}</td>
-                    <td>{MyG.leader}</td>
-                    <td>{MyG.status}</td>
-                    <td>{MyG.createdAt.substring(0, 10)}</td>
-                    <td>{MyG.updatedAt.substring(0, 10)}</td>
-                  </tr>
-                ))}
+              {MyGroup.map((MyGroup, index) => (
+                <tr key={index}>
+                  <th scope="row">{index + 1}</th>
+                  <td>{MyGroup.GroupName}</td>
+                  <td>{MyGroup.Cosupervisor}</td>
+                  <td>{MyGroup.Supervisor}</td>
+                  <td>{MyGroup.leader}</td>
+                  <td>{MyGroup.status}</td>
+                  <td>{MyGroup.createdAt.substring(0, 10)}</td>
+                  <td>{MyGroup.updatedAt.substring(0, 10)}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
           <br />
