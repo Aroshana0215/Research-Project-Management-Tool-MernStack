@@ -12,7 +12,7 @@ function Home() {
     <div>
         
       <SimpleImageSlider
-        width="100%"
+        width="98.7%"
         height={504}
         images={images}
         showBullets={true}
