@@ -73,7 +73,6 @@ function StaffRegister() {
 
   return (
     <div className="login_page">
-      <h2>Register</h2>
 
       {err && showErrMsg(err)}
       {success && showSuccessMsg(success)}

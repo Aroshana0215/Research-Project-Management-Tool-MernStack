@@ -4,7 +4,6 @@ import "./app.scss";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/header/Header";
-import Body from "./components/body/Body";
 import {
   dispatchLogin,
   fetchUser,
@@ -12,18 +11,28 @@ import {
 } from "./redux/actions/authAction";
 import TopicRegistration from "./components/student/Topics/TopicRegistration";
 import StudentTopicList from "./components/student/Topics/StudentTopicList";
-import StudentHeader from "./components/student/StudentHeader";
 import AllTopics from "./components/Admin/topics/TopicList";
 import UpdateTopic from "./components/Admin/topics/UpdateTopic";
-import GroupList from "./components/Admin/groups/GroupList";
-import MyGroup from "./components/student/groups/MyGroup";
-import GroupRegistration from "./components/student/groups/GroupRegistration";
-import MutualStudent from "./components/student/groups/MutualStudent";
+import MenuBar from "./components/header/MenuBar";
+import NotFound from "./components/utils/NotFound/NotFound";
+import Login from "./components/body/auth/Login";
+import ForgotPassword from "./components/body/auth/ForgotPassword";
+import ResetPassword from "./components/body/auth/ResetPassword";
+import Profile from "./components/body/profile/Profile";
+import ActivationEmail from "./components/body/auth/ActivationEmail";
+import UserList from "./components/Admin/UserList";
+import EditUser from "./components/body/profile/EditUser";
+import AssignmentHome from "./components/Admin/Template/AssignmentHome";
+import AddAssignment from "./components/Admin/Template/AddAssignment";
+import EditAssignment from "./components/Admin/Template/EditAssignment";
+import Register from "./components/body/auth/Register";
+import DownloadTemplates from "./components/student/Template/DownloadTemplates";
 
 const App = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const auth = useSelector((state) => state.auth);
+  const { isLogged , isAdmin , isStudent} = auth
 
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
@@ -57,33 +66,37 @@ const App = () => {
 
   return (
     <Router>
-      <div>
-        <header><Header /></header>
-        <Body />
+      <div >
+        <Header />
+        <MenuBar/>
 
-        <StudentHeader />
-        {/* topic registration */}
+        {/* user auth  routes*/}
+        <Route path="/login" component={isLogged ? NotFound : Login}  exact/>
+        <Route path="/register" component={isLogged ? NotFound : Register}  exact/>
+        <Route path="/forgot_password" component={isLogged ? NotFound : ForgotPassword}  exact/>
+        <Route path="/user/reset/:token" component={isLogged ? NotFound : ResetPassword}  exact/>
+        <Route path="/profile"  component={isLogged ? Profile : NotFound }  exact/>
+        <Route path="/user/activate/:activation_token"  component={ActivationEmail} exact />
+        <Route path="/userlist"  component={isAdmin ? UserList : NotFound }  exact/>
+        <Route path="/edit_user/:id"  component={isAdmin ? EditUser : NotFound }  exact/>
 
-        {/* <StudentHeader /> */}
+        {/* template routs */}
+        <Route path="/assignment" component={isAdmin ? AssignmentHome : NotFound} exact/>
+        <Route path="/student/assignment/" component={isStudent ? DownloadTemplates : NotFound} exact/>
+        <Route path="/assignment/add" component={isAdmin ? AddAssignment : NotFound} exact/>
+        <Route path="/assignment/edit/:id" component={isAdmin ? EditAssignment : NotFound} exact />
 
-        <Route path="/" exact component={TopicRegistration} />
+
+        {/* topic management */}
+        <Route path="/student/topic/registration" exact component={TopicRegistration} />
         <Route path="/student/topic/list" exact component={StudentTopicList} />
         <Route path="/admin/topic/list" exact component={AllTopics} />
         <Route path="/admin/topic/" exact component={TopicRegistration} />
         <Route path="/admin/update/topic/:id" exact component={UpdateTopic} />
-        {/* 
-        group registration */}
-        <Route path="/admin/Group/list" exact component={GroupList} />
-        <Route path="/Student/MyGroup/:id" exact component={MyGroup} />
-        <Route
-          path="/Student/Group/Registration"
-          exact
-          component={GroupRegistration}
-        />
-        <Route path="/Student/MutualStudent" exact component={MutualStudent} />
       </div>
     </Router>
   );
 };
 
 export default App;
+

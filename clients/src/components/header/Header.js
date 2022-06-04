@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import "./header.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function Header() {
   const auth = useSelector((state) => state.auth);
@@ -72,7 +71,7 @@ function Header() {
             alt=""
             width="40"
             height="45"
-            className="mr-2"
+            className="m-2"
           />
           Research Project Management Tool
         </a>
@@ -83,7 +82,8 @@ function Header() {
         <form className="d-flex">
           {!user.name ? (
             <>
-              <Link
+              <Link 
+              className="m-3"
               to="/login"
               style={{ textDecoration: "none" ,  }}
             >

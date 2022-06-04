@@ -55,7 +55,7 @@ function UserList() {
             {loading && <h3>Loading.....</h3>}
 
             <div className="col-right">
-                <h2>{isAdmin ? "Users" : "My Courses"}</h2>
+            <br /><br /><h2>User List</h2><br />
 
                 <div style={{ overflowX: "auto" }}>
                     <table className="customers">

@@ -31,8 +31,11 @@ const AddAssignment = () => {
   };
 
   return (
+    
     <div style={{ maxWidth: 500, margin: "auto" }}>
+      <br/><br/><h3>Template Upload </h3><br/>
       <div className="mb-3">
+      <label> Template name</label>
         <input
           className="form-control"
           placeholder="Enter name"
@@ -42,7 +45,9 @@ const AddAssignment = () => {
           onChange={handleChange("name")}
         />
       </div>
+      
       <div className="mb-3">
+      <label> File</label>
         <input
           className="form-control"
           type="file"
@@ -51,6 +56,7 @@ const AddAssignment = () => {
           onChange={handleChange("assignment")}
         />
       </div>
+
       <div className="text-center">
         <button className="btn btn-primary" onClick={handleSubmit}>
           Submit
