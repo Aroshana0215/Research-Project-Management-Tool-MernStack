@@ -49,7 +49,7 @@ function UpdateTopic() {
       <div className="content">
         <div className="container">
           <form className="row g-3" onSubmit={onSubmit}>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label htmlFor="formGroupExampleInput" className="form-label">
                 StudentID
               </label>
@@ -61,10 +61,10 @@ function UpdateTopic() {
                 defaultValue={StudentID}
                 onChange={(e) => onInputChange(e, "StudentID")}
               ></input>
-            </div>
+            </div> */}
             <div className="mb-3">
               <label htmlFor="formGroupExampleInput" className="form-label">
-                Salary
+                Topic Name
               </label>
               <input
                 id="topicName"
@@ -72,6 +72,7 @@ function UpdateTopic() {
                 className="form-control"
                 placeholder="topicName"
                 defaultValue={topicName}
+                readOnly
                 onChange={(e) => onInputChange(e, "topicName")}
               ></input>
             </div>
@@ -85,6 +86,7 @@ function UpdateTopic() {
                 className="form-control"
                 placeholder="description"
                 defaultValue={description}
+                readOnly
                 onChange={(e) => onInputChange(e, "description")}
               ></input>
             </div>

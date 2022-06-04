@@ -53,6 +53,7 @@ function MutualStudent() {
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Register Number</th>
               </tr>
             </thead>
             <tbody>
@@ -61,6 +62,7 @@ function MutualStudent() {
                   <th scope="row">{index + 1}</th>
                   <td>{MStudent.name}</td>
                   <td>{MStudent.email}</td>
+                  <td>{MStudent.registraionNumber}</td>
                 </tr>
               ))}
             </tbody>

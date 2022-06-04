@@ -33,7 +33,11 @@ const groupRegister = asyncHandler(async (req, res) => {
 
   //check members alredy have a group
   for (const GroupMember of GroupMembers) {
-    console.log(GroupMember);
+    console.log(
+      "🚀 ~ file: GroupCtrl.js ~ line 36 ~ groupRegister ~ GroupMember",
+      GroupMember
+    );
+
     const User = await user.findById(GroupMember.user_id);
     if (User.havingGroup) {
       return res
@@ -111,13 +115,22 @@ const deletGroup = asyncHandler(async (req, res) => {
 });
 
 const getMutualStudents = asyncHandler(async (req, res) => {
-  // const { degree, faculty } = req.body;
   try {
     const users = await user.find({
-      // "student.degree": degree,
-      // "student.faculty": faculty,
-      // role: "student",
+      role: "student",
       havingGroup: false,
+    });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+});
+const getMutualStaff = asyncHandler(async (req, res) => {
+  try {
+    const users = await user.find({
+      role: "supervisor",
+      role: "coSupervisor",
+      role: "panelMember",
     });
     res.status(200).json(users);
   } catch (error) {
@@ -134,11 +147,22 @@ const updateGroup = asyncHandler(async (req, res) => {
       Groups.Supervisor = req.body.Supervisor;
       Groups.status = req.body.status;
 
-      Topics.save()
+      Groups.save()
         .then(() => res.json("Group details updated!"))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));
+});
+
+const getLeader = asyncHandler(async (req, res) => {
+  const { StudentID } = req.body;
+  try {
+    const leader = await user.findOne({ _id: StudentID });
+    res.status(200).json(leader.name);
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+    console.log(error);
+  }
 });
 
 module.exports = {
@@ -149,4 +173,6 @@ module.exports = {
   allGrops,
   getMutualStudents,
   updateGroup,
+  getMutualStaff,
+  getLeader,
 };

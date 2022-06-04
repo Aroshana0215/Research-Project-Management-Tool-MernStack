@@ -27,16 +27,25 @@ import AddAssignment from "./components/Admin/Template/AddAssignment";
 import EditAssignment from "./components/Admin/Template/EditAssignment";
 import Register from "./components/body/auth/Register";
 import DownloadTemplates from "./components/student/Template/DownloadTemplates";
+import GroupRegistration from "./components/student/groups/GroupRegistration";
+import MutualStudent from "./components/student/groups/MutualStudent";
+import GroupList from "./components/Admin/groups/GroupList";
+import MyGroup from "./components/student/groups/MyGroup";
+import GroupListS from "./components/student/groups/GroupListS";
+import RequestFor from "./components/student/groups/RequestFor";
+import AdminGroupList from "./components/Admin/groups/AdminGroupList";
+import UpdateGroup from "./components/Admin/groups/UpdateGroup";
 import DownloadStuSubmissions from "./components/Admin/studentsubmissions/DownloadStuSubmissions";
 import EditSubmission from "./components/student/submissions/EditSubmission";
 import AddSubmission from "./components/student/submissions/AddSubmission";
 import StuSubmissionHome from "./components/student/submissions/StuSubmissionHome";
 
+
 const App = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const auth = useSelector((state) => state.auth);
-  const { isLogged , isAdmin , isStudent} = auth
+  const { isLogged, isAdmin, isStudent } = auth;
 
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
@@ -70,28 +79,115 @@ const App = () => {
 
   return (
     <Router>
-      <div >
+      <div>
         <Header />
-        <MenuBar/>
-
+        <MenuBar />
         {/* user auth  routes*/}
-        <Route path="/login" component={isLogged ? NotFound : Login}  exact/>
-        <Route path="/register" component={isLogged ? NotFound : Register}  exact/>
-        <Route path="/forgot_password" component={isLogged ? NotFound : ForgotPassword}  exact/>
-        <Route path="/user/reset/:token" component={isLogged ? NotFound : ResetPassword}  exact/>
-        <Route path="/profile"  component={isLogged ? Profile : NotFound }  exact/>
-        <Route path="/user/activate/:activation_token"  component={ActivationEmail} exact />
-        <Route path="/userlist"  component={isAdmin ? UserList : NotFound }  exact/>
-        <Route path="/edit_user/:id"  component={isAdmin ? EditUser : NotFound }  exact/>
-
+        <Route path="/login" component={isLogged ? NotFound : Login} exact />
+        <Route
+          path="/register"
+          component={isLogged ? NotFound : Register}
+          exact
+        />
+        <Route
+          path="/forgot_password"
+          component={isLogged ? NotFound : ForgotPassword}
+          exact
+        />
+        <Route
+          path="/user/reset/:token"
+          component={isLogged ? NotFound : ResetPassword}
+          exact
+        />
+        <Route
+          path="/profile"
+          component={isLogged ? Profile : NotFound}
+          exact
+        />
+        <Route
+          path="/user/activate/:activation_token"
+          component={ActivationEmail}
+          exact
+        />
+        <Route
+          path="/userlist"
+          component={isAdmin ? UserList : NotFound}
+          exact
+        />
+        <Route
+          path="/edit_user/:id"
+          component={isAdmin ? EditUser : NotFound}
+          exact
+        />
         {/* template routs */}
-        <Route path="/assignment" component={isAdmin ? AssignmentHome : NotFound} exact/>
-        <Route path="/student/assignment/" component={isStudent ? DownloadTemplates : NotFound} exact/>
-        <Route path="/assignment/add" component={isAdmin ? AddAssignment : NotFound} exact/>
-        <Route path="/assignment/edit/:id" component={isAdmin ? EditAssignment : NotFound} exact />
-
-
+        <Route
+          path="/assignment"
+          component={isAdmin ? AssignmentHome : NotFound}
+          exact
+        />
+        <Route
+          path="/student/assignment/"
+          component={isStudent ? DownloadTemplates : NotFound}
+          exact
+        />
+        <Route
+          path="/assignment/add"
+          component={isAdmin ? AddAssignment : NotFound}
+          exact
+        />
+        <Route
+          path="/assignment/edit/:id"
+          component={isAdmin ? EditAssignment : NotFound}
+          exact
+        />
         {/* topic management */}
+
+        <Route
+          path="/student/topic/registration"
+          component={isStudent ? TopicRegistration : NotFound}
+        />
+        <Route
+          path="/student/topic/list"
+          component={isStudent ? StudentTopicList : NotFound}
+        />
+        <Route
+          path="/admin/topic/list"
+          component={isLogged ? AllTopics : NotFound}
+        />
+        <Route
+          path="/admin/update/topic/:id"
+          component={isLogged ? UpdateTopic : NotFound}
+        />
+        {/* group Managemnet */}
+        <Route
+          path="/student/group/registration"
+          component={isStudent ? GroupRegistration : NotFound}
+        />
+        <Route
+          path="/student/group/myMutuals"
+          component={isStudent ? MutualStudent : NotFound}
+        />
+        <Route
+          path="/student/group/registeredGroup"
+          component={isStudent ? GroupListS : NotFound}
+        />
+        <Route
+          path="/student/group/myGroup"
+          component={isStudent ? MyGroup : NotFound}
+        />
+        <Route
+          path="/student/group/update/:id"
+          component={isStudent ? RequestFor : NotFound}
+        />
+        <Route
+          path="/Admin/group/list/"
+          component={isLogged ? AdminGroupList : NotFound}
+        />
+        <Route
+          path="/Admin/group/update/:id"
+          component={isLogged ? UpdateGroup : NotFound}
+        />
+
         <Route path="/student/topic/registration" exact component={TopicRegistration} />
         <Route path="/student/topic/list" exact component={StudentTopicList} />
         <Route path="/admin/topic/list" exact component={AllTopics} />
@@ -105,10 +201,10 @@ const App = () => {
           <Route path="/submission/edit/:id" component={EditSubmission} />
 
           <Route path="/admin/view_submissions" component={DownloadStuSubmissions} />
+
       </div>
     </Router>
   );
 };
 
 export default App;
-
