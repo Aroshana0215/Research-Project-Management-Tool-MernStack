@@ -27,6 +27,10 @@ import AddAssignment from "./components/Admin/Template/AddAssignment";
 import EditAssignment from "./components/Admin/Template/EditAssignment";
 import Register from "./components/body/auth/Register";
 import DownloadTemplates from "./components/student/Template/DownloadTemplates";
+import DownloadStuSubmissions from "./components/Admin/studentsubmissions/DownloadStuSubmissions";
+import EditSubmission from "./components/student/submissions/EditSubmission";
+import AddSubmission from "./components/student/submissions/AddSubmission";
+import StuSubmissionHome from "./components/student/submissions/StuSubmissionHome";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -93,6 +97,14 @@ const App = () => {
         <Route path="/admin/topic/list" exact component={AllTopics} />
         <Route path="/admin/topic/" exact component={TopicRegistration} />
         <Route path="/admin/update/topic/:id" exact component={UpdateTopic} />
+
+        <Route exact path="/submission" component={StuSubmissionHome} />
+
+          <Route path="/submission/add" component={AddSubmission} />
+
+          <Route path="/submission/edit/:id" component={EditSubmission} />
+
+          <Route path="/admin/view_submissions" component={DownloadStuSubmissions} />
       </div>
     </Router>
   );
